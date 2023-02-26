@@ -1,20 +1,20 @@
 packaging_format = 2
 
-id = "bookwyrm"
-name = "BookWyrm"
-description.en = "Platform for social reading"
-description.fr = "Plateforme de lecture sociale"
+id = "fittrackee"
+name = "FitTrackee"
+description.en = " Self-hosted outdoor activity tracker 🚴"
+description.fr = " Traqueur d’activités extérieures auto-hébergé 🚴 "
 
-version = "0.5.4~ynh1"
+version = "0.7.12~ynh1"
 
-maintainers = ["oufmilo"]
+maintainers = ["Thovi98"]
 
 [upstream]
-license = "AGPL-3.0-or-later"
-website = "https://joinbookwyrm.com/fr/"
-demo = "https://joinbookwyrm.com/fr/"
-admindoc = "https://docs.joinbookwyrm.com/"
-code = "https://github.com/bookwyrm-social/bookwyrm" 
+license = "AGPL-3.0"
+website = "https://samr1.github.io/FitTrackee"
+demo = ""
+admindoc = "https://samr1.github.io/FitTrackee"
+code = "https://github.com/SamR1/FitTrackee" 
 
 [integration]
 yunohost = ">= 11.0.9"
@@ -40,7 +40,7 @@ ram.runtime = "50M"
     ask.en = "Choose the application language"
     ask.fr = "Choisissez la langue de l'application"
     type = "string"
-    choices = ["de-de", "en-us", "es-es", "fr-fr", "it-it", "pt-pt", "zh-hans"]
+    choices = ["de-de", "en-us", "fr-fr", "it-it", "nl-nl"]
     default = "fr-fr"
 
     [install.admin]
