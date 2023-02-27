@@ -9,7 +9,6 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-weather_api_key=$(ynh_string_random --length=32)
 
 #=================================================
 # INSTALL DEPENDENCIES

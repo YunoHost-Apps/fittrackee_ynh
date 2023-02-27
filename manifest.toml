@@ -40,12 +40,7 @@ ram.runtime = "50M"
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "user"
 
-    [install.weather_api_key]
-    ask.en = "visualcrossing api key for the weather data"
-    ask.fr = "Clé API visualcrossing pour les données météos"
-    type = "string"
-
-[resources]
+  [resources]
     [resources.system_user]
 
     [resources.install_dir]
