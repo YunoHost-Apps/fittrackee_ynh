@@ -50,11 +50,7 @@ popd
 ynh_script_progression --message="Installing service script..." --weight=1
 
 key=$(ynh_string_random --length=45 | base64)
-redis_db=$(ynh_redis_get_free_db)
-
 ynh_app_setting_set --app=$app --key=key --value=$key
-ynh_app_setting_set --app=$app --key=redis_db --value=$redis_db
-
 
 
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
