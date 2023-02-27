@@ -15,7 +15,7 @@ Group=__APP__
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=__APP___workers
-Environment="FLASK_APP=__APP__"
+Environment="FLASK_APP=fittrackee"
 Environment="APP_SECRET_KEY="
 Environment="APP_LOG="
 Environment="UPLOAD_FOLDER="
@@ -26,8 +26,7 @@ Environment="SENDER_EMAIL="
 Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=__INSTALL_DIR__/.env
-ExecStart=__INSTALL_DIR__/venv/bin/celery -A celerywyrm worker -l info -Q high_priority,medium_priority,low_priority
-ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 4
+ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
 Restart=always
 
 NoNewPrivileges=yes

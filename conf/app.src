@@ -1,5 +1,0 @@
-SOURCE_URL=https://codeload.github.com/SamR1/FitTrackee/tar.gz/refs/tags/v0.7.12
-SOURCE_SUM=8fe1e2768453058792f9f2b9bc9fa411dceeaa8aac2cd5f2096b583b8111de00
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=tar.gz
-SOURCE_IN_SUBDIR=true

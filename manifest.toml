@@ -36,16 +36,14 @@ ram.runtime = "50M"
     type = "group"
     default = "visitors"
 
-    [install.language]
-    ask.en = "Choose the application language"
-    ask.fr = "Choisissez la langue de l'application"
-    type = "string"
-    choices = ["de-de", "en-us", "fr-fr", "it-it", "nl-nl"]
-    default = "fr-fr"
-
     [install.admin]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "user"
+
+    [install.weather_api_key]
+    ask.en = "visualcrossing api key for the weather data"
+    ask.fr = "Clé API visualcrossing pour les données météos"
+    type = "string"
 
 [resources]
     [resources.system_user]

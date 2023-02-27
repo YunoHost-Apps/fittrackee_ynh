@@ -9,26 +9,53 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+weather_api_key=$(ynh_string_random --length=32)
 
-admin_mail=$(ynh_user_get_info --username=$admin --key=username)
-key=$(ynh_string_random --length=32)
+#=================================================
+# INSTALL DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing dependencies..." --weight=23
+
+ynh_exec_warn_less python3 -m pip install pipenv
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Setting up source files..." --weight=1
-
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source --dest_dir="$install_dir"
+ynh_script_progression --message="Setting up source files..." --weight=64
 
 # Set permissions to app files
-chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+# mkdir -p "$install_dir/.venv"
+# chown -R $app:$app "$install_dir"
+# chmod -R g=u,g-w,o-rwx "$install_dir"
+# setfacl -nR -m g:$app.main:rx -m d:g:$app.main:rx "$install_dir/.venv"
+# setfacl -n -m g:$app.main:x "$install_dir"
+
+# pushd "$install_dir"
+# 	sudo -u $app PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true python3 -m pipenv install jupyterlab==$jupyterlab_version jupyterhub notebook jupyter-server jupyterhub-ldapauthenticator pyzmq sudospawner 2>&1
+# 	sudo -u $app python3 -m pipenv run jupyterhub upgrade-db 2>&1
+# popd
+
+
+mkdir -p "$install_dir"
+
+pushd $install_dir
+	mkdir -p .venv
+	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version
+popd
+
 
 #=================================================
-# CONFIGURE THEN INSTALL SCRIPT AND DEPENDENCIES
+# CONFIGURE THE INSTALL SCRIPT
 #=================================================
 ynh_script_progression --message="Installing service script..." --weight=1
+
+key=$(ynh_string_random --length=45 | base64)
+redis_db=$(ynh_redis_get_free_db)
+
+ynh_app_setting_set --app=$app --key=key --value=$key
+ynh_app_setting_set --app=$app --key=redis_db --value=$redis_db
+
+
 
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
@@ -38,17 +65,16 @@ set -a; source "$install_dir/.env"; set +a
 
 mkdir "$install_dir/venv"
 python3 -m venv "$install_dir/venv"
-$install_dir/venv/bin/pip3 install -r "$install_dir/requirements.txt"
+source $install_dir/.env
 
 #=================================================
 # INITIALIZE DATABASE
 #=================================================
 ynh_script_progression --message="Initializing database..." --weight=1
 
-$install_dir/venv/bin/python3 "$install_dir/manage.py" migrate
-$install_dir/venv/bin/python3 "$install_dir/manage.py" initdb
-$install_dir/venv/bin/python3 "$install_dir/manage.py" collectstatic --no-input
+ftcli db upgrade
 
+flask worker --processes 2
 
 #=================================================
 # NGINX CONFIGURATION
@@ -58,17 +84,16 @@ ynh_script_progression --message="Configuring NGINX web server..." --weight=1
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
+
 #=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
-ynh_add_config --template="../conf/${app}.target" --destination="/etc/systemd/system/$app.target"
-
 # Create a dedicated systemd config
-ynh_add_systemd_config --service="${app}-server" --template="${app}-server.service"
-ynh_add_systemd_config --service="${app}-worker" --template="${app}-worker.service"
-ynh_add_systemd_config --service="${app}-beat"   --template="${app}-beat.service"
+ynh_add_systemd_config --service="${app}" --template="${app}.service"
+ynh_add_systemd_config --service="${app}-workers" --template="${app}-workers.service"
+
 
 #=================================================
 # GENERIC FINALIZATION
@@ -77,9 +102,8 @@ ynh_add_systemd_config --service="${app}-beat"   --template="${app}-beat.service
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add "${app}-beat"
-yunohost service add "${app}-server"
-yunohost service add "${app}-worker"
+yunohost service add "${app}"
+yunohost service add "${app}-workers"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -87,9 +111,9 @@ yunohost service add "${app}-worker"
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 # Start a systemd service
-ynh_systemd_action --service_name="${app}-beat" --action="start" --log_path="systemd" --line_match="Started"
-ynh_systemd_action --service_name="${app}-server" --action="start" --log_path="systemd" --line_match="Booting worker with pid"
-ynh_systemd_action --service_name="${app}-worker" --action="start" --log_path="systemd" --line_match="ready"
+ynh_systemd_action --service_name="${app}" --action="start" --log_path="systemd" --line_match="Booting worker with pid"
+ynh_systemd_action --service_name="${app}-workers" --action="start" --log_path="systemd" --line_match="ready"
+
 
 #=================================================
 # END OF SCRIPT
