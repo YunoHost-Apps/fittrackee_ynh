@@ -1,15 +1,34 @@
 
 [Unit]
-Description=__APP__ celery beat process
-After=redis.service postgresql.service
-PartOf=__APP__.target
+Description=__APP__ task queue service
+After=network.target
+After=postgresql.service
+After=redis.service
+StartLimitIntervalSec=0
 
 [Service]
+Type=simple
+Restart=always
+RestartSec=1
 User=__APP__
 Group=__APP__
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=__APP___workers
+Environment="FLASK_APP=__APP__"
+Environment="APP_SECRET_KEY="
+Environment="APP_LOG="
+Environment="UPLOAD_FOLDER="
+Environment="DATABASE_URL="
+Environment="UI_URL="
+Environment="EMAIL_URL="
+Environment="SENDER_EMAIL="
+Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=__INSTALL_DIR__/.env
-ExecStart=__INSTALL_DIR__/venv/bin/celery -A celerywyrm beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+ExecStart=__INSTALL_DIR__/venv/bin/celery -A celerywyrm worker -l info -Q high_priority,medium_priority,low_priority
+ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 4
+Restart=always
 
 NoNewPrivileges=yes
 PrivateTmp=yes
