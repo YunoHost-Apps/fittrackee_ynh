@@ -25,7 +25,7 @@ BookWyrm is a social network for tracking your reading, talking about books, wri
 
 ## Screenshots
 
-![Screenshot of Fittrackee](./doc/screenshots/screenshot-fittrackee.png
+![Screenshot of Fittrackee](./doc/screenshots/screenshot-fittrackee.png)
 
 ## Disclaimers / important information
 
