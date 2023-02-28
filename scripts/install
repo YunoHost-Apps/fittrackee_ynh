@@ -45,6 +45,13 @@ pushd $install_dir
 	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
 popd
 
+#=================================================
+# CONFIGURE log file
+#=================================================
+
+mkdir /var/log/$app/
+touch /var/log/$app/$app.log
+chown -R $app: /var/log/$app/
 
 #=================================================
 # CONFIGURE THE INSTALL SCRIPT
@@ -64,6 +71,7 @@ set -a; source "$install_dir/.env"; set +a
 mkdir "$install_dir/venv"
 python3 -m venv "$install_dir/venv"
 source $install_dir/.env
+
 
 #=================================================
 # INITIALIZE DATABASE
