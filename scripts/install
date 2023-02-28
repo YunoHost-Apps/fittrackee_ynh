@@ -67,9 +67,9 @@ source $install_dir/.env
 #=================================================
 ynh_script_progression --message="Initializing database..." --weight=1
 
-ftcli db upgrade
+$install_dir/ftcli db upgrade
 
-flask worker --processes 2
+
 
 #=================================================
 # NGINX CONFIGURATION
