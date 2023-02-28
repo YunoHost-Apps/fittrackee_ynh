@@ -36,6 +36,9 @@ ynh_script_progression --message="Setting up source files..." --weight=64
 
 
 mkdir -p "$install_dir"
+# Set permissions to app files
+chmod -R o-rwx "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 pushd $install_dir
 	mkdir -p .venv

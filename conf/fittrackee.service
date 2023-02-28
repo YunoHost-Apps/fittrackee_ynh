@@ -29,7 +29,7 @@ Environment="MAP_ATTRIBUTION="
 Environment="WEATHER_API_KEY="
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=__INSTALL_DIR__/.env
-ExecStart=__INSTALL_DIR__/.venv/bin/gunicorn -b 127.0.0.1:__PORT__ "fittrackee:create_app()" --error-logfile /var/log/$app/$app.log
+ExecStart=__INSTALL_DIR__/.venv/bin/gunicorn -b 127.0.0.1:__PORT__ "fittrackee:create_app()" --error-logfile /var/log/__APP__/__APP__.log
 Restart=always
 
 [Install]
