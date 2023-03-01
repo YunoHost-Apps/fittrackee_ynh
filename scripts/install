@@ -48,6 +48,7 @@ popd
 #=================================================
 # CONFIGURE log file
 #=================================================
+ynh_script_progression --message="Configure log file" --weight=1
 
 mkdir /var/log/$app/
 touch /var/log/$app/$app.log
