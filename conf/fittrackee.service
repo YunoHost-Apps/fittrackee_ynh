@@ -12,8 +12,8 @@ Restart=always
 RestartSec=1
 User=__APP__
 Group=__APP__
-StandardOutput=syslog
-StandardError=syslog
+
+
 SyslogIdentifier=__APP__
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=/etc/systemd/system/__APP__.service.d/variables.conf
