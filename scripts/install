@@ -100,6 +100,19 @@ ynh_script_progression --message="Configuring a systemd service..." --weight=1
 ynh_add_systemd_config --service="${app}" --template="${app}.service"
 ynh_add_systemd_config --service="${app}_workers" --template="${app}_workers.service"
 
+mkdir /etc/systemd/system/${app}.service.d/
+chown $app:www-data /etc/systemd/system/${app}.service.d/
+
+ynh_add_config --template="../conf/variables_fittrackee_workers.conf" --destination="/etc/systemd/system/${app}.service.d/variables.conf"
+chmod 600 /etc/systemd/system/${app}.service.d/variables.conf
+chown $app:www-data "/etc/systemd/system/${app}.service.d/variables.conf"
+
+mkdir /etc/systemd/system/${app}_workers.service.d/
+chown $app:www-data /etc/systemd/system/${app}_workers.service.d/
+
+ynh_add_config --template="../conf/variables_fittrackee_workers.conf" --destination="/etc/systemd/system/${app}_workers.service.d/variables.conf"
+chmod 600 /etc/systemd/system/${app}_workers.service.d/variables.conf
+chown $app:www-data "/etc/systemd/system/${app}_workers.service.d/variables.conf"
 
 #=================================================
 # GENERIC FINALIZATION
