@@ -16,7 +16,7 @@ StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=__APP___workers
 WorkingDirectory=__INSTALL_DIR__/
-EnvironmentFile=/etc/systemd/system/${app}_workers.service.d/variables.conf
+EnvironmentFile=/etc/systemd/system/__APP___workers.service.d/variables.conf
 ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
 Restart=always
 
