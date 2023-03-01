@@ -15,15 +15,6 @@ Group=__APP__
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=__APP___workers
-Environment="FLASK_APP=fittrackee"
-Environment="APP_SECRET_KEY="
-Environment="APP_LOG="
-Environment="UPLOAD_FOLDER="
-Environment="DATABASE_URL="
-Environment="UI_URL="
-Environment="EMAIL_URL="
-Environment="SENDER_EMAIL="
-Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=/etc/systemd/system/${app}_workers.service.d/variables.conf
 ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
