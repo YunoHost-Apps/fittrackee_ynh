@@ -38,7 +38,7 @@ ynh_script_progression --message="Setting up source files..." --weight=64
 mkdir -p "$install_dir"
 # Set permissions to app files
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R $app: "$install_dir"
 
 pushd $install_dir
 	mkdir -p .venv
@@ -65,7 +65,7 @@ ynh_app_setting_set --app=$app --key=key --value=$key
 
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
-chown $app:www-data "$install_dir/.env"
+chown $app: "$install_dir/.env"
 
 set -a; source "$install_dir/.env"; set +a
 
@@ -92,18 +92,18 @@ ynh_add_nginx_config
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 mkdir /etc/systemd/system/${app}.service.d/
-chown $app:www-data /etc/systemd/system/${app}.service.d/
+chown $app: /etc/systemd/system/${app}.service.d/
 
 ynh_add_config --template="../conf/variables_fittrackee_workers.conf" --destination="/etc/systemd/system/${app}.service.d/variables.conf"
 chmod 600 /etc/systemd/system/${app}.service.d/variables.conf
-chown $app:www-data "/etc/systemd/system/${app}.service.d/variables.conf"
+chown $app: "/etc/systemd/system/${app}.service.d/variables.conf"
 
 mkdir /etc/systemd/system/${app}_workers.service.d/
-chown $app:www-data /etc/systemd/system/${app}_workers.service.d/
+chown $app: /etc/systemd/system/${app}_workers.service.d/
 
 ynh_add_config --template="../conf/variables_fittrackee_workers.conf" --destination="/etc/systemd/system/${app}_workers.service.d/variables.conf"
 chmod 600 /etc/systemd/system/${app}_workers.service.d/variables.conf
-chown $app:www-data "/etc/systemd/system/${app}_workers.service.d/variables.conf"
+chown $app: "/etc/systemd/system/${app}_workers.service.d/variables.conf"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config --service="${app}" --template="${app}.service"
