@@ -28,9 +28,8 @@ upgrade_type=$(ynh_check_app_version_changed)
 #=================================================
 ynh_script_progression --message="Stopping a systemd service..." --weight=1
 
-ynh_systemd_action --action="stop" --service_name="${app}-beat" --log_path="systemd" --line_match="Stopped"
-ynh_systemd_action --action="stop" --service_name="${app}-server" --log_path="systemd" --line_match="Stopped"
-ynh_systemd_action --action="stop" --service_name="${app}-worker" --log_path="systemd" --line_match="Stopped"
+ynh_systemd_action --action="stop" --service_name="${app}" --log_path="/var/log/$app/$app.log" --line_match="Stopped"
+ynh_systemd_action --action="stop" --service_name="${app}_workers" --log_path="systemd" --line_match="Stopped"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -44,35 +43,33 @@ then
 	ynh_setup_source --dest_dir="$install_dir" --keep=".env"
 fi
 
-chmod 750 "$install_dir"
+mkdir -p "$install_dir"
 chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+chown -R $app: "$install_dir"
 
+pushd $install_dir
+	mkdir -p .venv
+	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
+popd
 
 #=================================================
 # CONFIGURE THEN INSTALL SCRIPT AND DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Installing service script..." --weight=1
 
-ynh_secure_remove --file="$install_dir/venv"
-mkdir "$install_dir/venv"
-python3 -m venv "$install_dir/venv"
-$install_dir/venv/bin/pip3 install -r "$install_dir/requirements.txt"
+ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
+chmod 600 $install_dir/.env
+chown $app: "$install_dir/.env"
+
+set -a; source "$install_dir/.env"; set +a
 
 #=================================================
 # Update DATABASE
 #=================================================
 ynh_script_progression --message="Upgrading database..." --weight=1
 
-$install_dir/venv/bin/python3 "$install_dir/manage.py" migrate
-$install_dir/venv/bin/python3 "$install_dir/manage.py" collectstatic --no-input
-$install_dir/venv/bin/python3 "$install_dir/manage.py" populate_streams
+ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
 
-#=================================================
-# SET PERMISSIONS ON BOOKWYRM DIRECTORY
-#=================================================
-
-chown -R $app:www-data $install_dir
 
 #=================================================
 # NGINX CONFIGURATION
@@ -90,9 +87,9 @@ ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
 ynh_add_config --template="../conf/${app}.target" --destination="/etc/systemd/system/$app.target"
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --service="${app}-server" --template="${app}-server.service"
-ynh_add_systemd_config --service="${app}-worker" --template="${app}-worker.service"
-ynh_add_systemd_config --service="${app}-beat"   --template="${app}-beat.service"
+ynh_add_systemd_config --service="${app}"   --template="${app}.service"
+ynh_add_systemd_config --service="${app}_workers" --template="${app}_workers.service"
+
 
 #=================================================
 # GENERIC FINALIZATION
@@ -101,18 +98,16 @@ ynh_add_systemd_config --service="${app}-beat"   --template="${app}-beat.service
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add "${app}-beat"
-yunohost service add "${app}-server"
-yunohost service add "${app}-worker"
+yunohost service add "${app}"
+yunohost service add "${app}_workers"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
-ynh_systemd_action --service_name="${app}-beat" --action="start" --log_path="systemd" --line_match="Started"
-ynh_systemd_action --service_name="${app}-server" --action="start" --log_path="systemd" --line_match="Booting worker with pid"
-ynh_systemd_action --service_name="${app}-worker" --action="start" --log_path="systemd" --line_match="ready"
+ynh_systemd_action --service_name="${app}" --action="start" --log_path="/var/log/$app/$app.log" --line_match="Started"
+ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="systemd" --line_match="ready"
 
 #=================================================
 # END OF SCRIPT
