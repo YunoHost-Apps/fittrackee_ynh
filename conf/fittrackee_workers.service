@@ -17,6 +17,7 @@ Group=__APP__
 SyslogIdentifier=__APP___workers
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=/etc/systemd/system/__APP___workers.service.d/variables.conf
+EnvironmentFile=__INSTALL_DIR__/.env
 ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
 Restart=always
 
