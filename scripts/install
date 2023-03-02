@@ -74,7 +74,13 @@ set -a; source "$install_dir/.env"; set +a
 #=================================================
 ynh_script_progression --message="Initializing database..." --weight=1
 
-ynh_exec_warn_less /var/www/fittrackee/.venv/bin/ftcli db upgrade
+ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+
+$install_dir/.venv/bin/deactivate
+
+$install_dir/.venv/bin/fittrackee
+
+
 
 
 #=================================================
