@@ -4,7 +4,7 @@ Description=__APP__ task queue service
 After=network.target
 After=postgresql.service
 After=redis.service
-StartLimitIntervalSec=0
+
 
 [Service]
 Type=simple
@@ -25,7 +25,7 @@ Environment="SENDER_EMAIL="
 Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
-Restart=always
+
 
 NoNewPrivileges=yes
 PrivateTmp=yes
