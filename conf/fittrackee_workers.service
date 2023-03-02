@@ -12,8 +12,6 @@ Restart=always
 RestartSec=1
 User=__APP__
 Group=__APP__
-StandardOutput=journal
-StandardError=journal
 SyslogIdentifier=__APP___workers
 EnvironmentFile=__INSTALL_DIR__/.env
 Environment="FLASK_APP=fittrackee"
