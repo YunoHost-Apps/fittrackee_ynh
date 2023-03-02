@@ -69,11 +69,6 @@ chown $app:www-data "$install_dir/.env"
 
 set -a; source "$install_dir/.env"; set +a
 
-mkdir "$install_dir/venv"
-python3 -m venv "$install_dir/venv"
-source $install_dir/.env
-
-
 #=================================================
 # INITIALIZE DATABASE
 #=================================================
@@ -97,10 +92,6 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
-# Create a dedicated systemd config
-ynh_add_systemd_config --service="${app}" --template="${app}.service"
-ynh_add_systemd_config --service="${app}_workers" --template="${app}_workers.service"
-
 mkdir /etc/systemd/system/${app}.service.d/
 chown $app:www-data /etc/systemd/system/${app}.service.d/
 
@@ -114,6 +105,10 @@ chown $app:www-data /etc/systemd/system/${app}_workers.service.d/
 ynh_add_config --template="../conf/variables_fittrackee_workers.conf" --destination="/etc/systemd/system/${app}_workers.service.d/variables.conf"
 chmod 600 /etc/systemd/system/${app}_workers.service.d/variables.conf
 chown $app:www-data "/etc/systemd/system/${app}_workers.service.d/variables.conf"
+
+# Create a dedicated systemd config
+ynh_add_systemd_config --service="${app}" --template="${app}.service"
+ynh_add_systemd_config --service="${app}_workers" --template="${app}_workers.service"
 
 #=================================================
 # GENERIC FINALIZATION
