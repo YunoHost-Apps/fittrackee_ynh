@@ -84,11 +84,9 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
 
-ynh_add_config --template="../conf/${app}.target" --destination="/etc/systemd/system/$app.target"
-
 # Create a dedicated systemd config
-ynh_add_systemd_config --service="${app}"   --template="${app}.service"
-ynh_add_systemd_config --service="${app}_workers" --template="${app}_workers.service"
+ynh_add_systemd_config --service="${app}"   --template="fittrackee.service"
+ynh_add_systemd_config --service="${app}_workers" --template="fittrackee_workers.service"
 
 
 #=================================================
