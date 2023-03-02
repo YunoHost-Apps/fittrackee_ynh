@@ -29,11 +29,11 @@ fi
 #=================================================
 ynh_script_progression --message="Stopping and removing the systemd service..." --weight=1
 
-ynh_systemd_action --service_name="${app}-server" --action="stop" --log_path="systemd" --line_match="Stopped $app"
+ynh_systemd_action --service_name="${app}" --action="stop" --log_path="/var/log/$app/$app.log" --line_match="Stopped $app"
 ynh_systemd_action --service_name="${app}_workers" --action="stop" --log_path="systemd" --line_match="Stopped $app"
 
 # Remove the dedicated systemd config
-ynh_remove_systemd_config --service="${app}-server"
+ynh_remove_systemd_config --service="${app}"
 ynh_remove_systemd_config --service="${app}_workers"
 
 
@@ -52,8 +52,7 @@ ynh_script_progression --message="Removing various files..."
 
 # Remove the log files
 ynh_secure_remove --file="/var/log/$app"
-ynh_secure_remove --file="/etc/systemd/system/${app}.service.d/"
-ynh_secure_remove --file="/etc/systemd/system/${app}_workers.service.d/"
+
 
 #=================================================
 # REMOVE NGINX CONFIGURATION
