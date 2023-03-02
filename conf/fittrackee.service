@@ -17,6 +17,7 @@ Group=__APP__
 SyslogIdentifier=__APP__
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=/etc/systemd/system/__APP__.service.d/variables.conf
+EnvironmentFile=__INSTALL_DIR__/.env
 ExecStart=__INSTALL_DIR__/.venv/bin/gunicorn -b 127.0.0.1:__PORT__ "fittrackee:create_app()" --error-logfile /var/log/__APP__/__APP__.log
 Restart=always
 
