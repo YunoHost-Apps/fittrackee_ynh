@@ -86,7 +86,7 @@ ynh_script_progression --message="Initializing database..." --weight=1
 
 ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
 
-
+ynh_exec_warn_less $install_dir/.venv/bin/fittrackee
 
 
 
