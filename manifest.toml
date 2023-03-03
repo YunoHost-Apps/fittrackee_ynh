@@ -53,7 +53,8 @@ ram.runtime = "50M"
     [resources.ports]
     main.default = 5000
 
-
+    [resources.apt]
+    packages = "postgresql, postgresql-contrib"
 
 
     [resources.database]
