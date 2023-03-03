@@ -63,6 +63,10 @@ ynh_script_progression --message="Removing NGINX web server configuration..." --
 ynh_remove_nginx_config
 
 
+ynh_remove_logrotate
+
+ynh_remove_fail2ban_config
+
 
 #=================================================
 # END OF SCRIPT
