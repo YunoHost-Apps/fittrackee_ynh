@@ -54,7 +54,7 @@ ram.runtime = "50M"
     main.default = 5000
 
     [resources.apt]
-    packages = "postgresql, postgresql-contrib, python3-venv, libpq-dev"
+    packages = "postgresql, postgresql-contrib, python3-venv"
 
     [resources.database]
     type = "postgresql"
