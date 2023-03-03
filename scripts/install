@@ -39,7 +39,7 @@ ynh_script_progression --message="Setting up source files..." --weight=64
 mkdir -p "$install_dir"
 # Set permissions to app files
 chmod -R o-rwx "$install_dir"
-chown -R $app: "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 pushd $install_dir
 	mkdir -p .venv
@@ -53,7 +53,7 @@ ynh_script_progression --message="Configure log file" --weight=1
 
 mkdir /var/log/$app/
 touch /var/log/$app/$app.log
-chown -R $app: /var/log/$app/
+chown -R $app:www-data /var/log/$app/
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate
@@ -75,7 +75,7 @@ ynh_app_setting_set --app=$app --key=key --value=$key
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
 
-chown -R $app: "$install_dir"
+chown -R $app:www-data "$install_dir"
 
 set -a; source "$install_dir/.env"; set +a
 
