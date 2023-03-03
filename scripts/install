@@ -66,7 +66,6 @@ ynh_app_setting_set --app=$app --key=key --value=$key
 
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
-chown $app: "$install_dir/.env"
 
 chown -R $app: "$install_dir"
 
