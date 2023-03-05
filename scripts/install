@@ -19,6 +19,26 @@ ynh_script_progression --message="Installing dependencies..." --weight=23
 
 ynh_exec_warn_less python3 -m pip install pipenv
 
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_script_progression --message="Setting up source files..." --weight=64
+
+chown -R $app:www-data "$install_dir"
+
+pushd $install_dir
+	mkdir -p .venv
+	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
+popd
+
+#=================================================
+# LOGROTATE
+#=================================================
+ynh_script_progression --message="Configuring logrotate to manage application logfiles" --weight=1
+
+# Use logrotate to manage application logfile(s)
+ynh_use_logrotate --specific_user=$app
+chown -R $app:www-data /var/log/$app/
 
 
 #=================================================
@@ -26,7 +46,6 @@ ynh_exec_warn_less python3 -m pip install pipenv
 #=================================================
 ynh_script_progression --message="Installing service script..." --weight=1
 
-# key for the .env __KEY__
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --app=$app --key=key --value=$key
 
@@ -36,64 +55,31 @@ chmod 600 $install_dir/.env
 
 chown -R $app:www-data "$install_dir"
 
-#=================================================
-# LOGROTATE
-ynh_script_progression --message="Configuring logrotate to manage application logfiles" --weight=1
-
-# Use logrotate to manage application logfile(s)
-ynh_use_logrotate --specific_user=$app
-chown -R $app:www-data /var/log/$app/
-
 set -a; source "$install_dir/.env"; set +a
-
-#=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-
-
-# Set permissions to app files
-# mkdir -p "$install_dir/.venv"
-# chown -R $app:$app "$install_dir"
-# chmod -R g=u,g-w,o-rwx "$install_dir"
-# setfacl -nR -m g:$app.main:rx -m d:g:$app.main:rx "$install_dir/.venv"
-# setfacl -n -m g:$app.main:x "$install_dir"
-
-# pushd "$install_dir"
-# 	sudo -u $app PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true python3 -m pipenv install jupyterlab==$jupyterlab_version jupyterhub notebook jupyter-server jupyterhub-ldapauthenticator pyzmq sudospawner 2>&1
-# 	sudo -u $app python3 -m pipenv run jupyterhub upgrade-db 2>&1
-# popd
-
-ynh_script_progression --message="Setting up source files..." --weight=64
-
-pushd $install_dir
-	mkdir -p .venv
-	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
-	ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
-popd
-
 
 #=================================================
 # INITIALIZE DATABASE
 #=================================================
-ynh_script_progression --message="Initializing Fittrackee database..." --weight=1
+ynh_script_progression --message="Initializing database..." --weight=1
 
-# ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+
+# ynh_exec_warn_less $install_dir/.venv/bin/fittrackee
 
 
-#=================================================
-# System Configuration
-#=================================================
-ynh_script_progression --message="Adding system configurations related to $app ..." --weight=1
 
 #=================================================
 # NGINX CONFIGURATION
+#=================================================
 ynh_script_progression --message="Configuring NGINX web server..." --weight=1
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config
 
+
 #=================================================
 # SETUP SYSTEMD
+#=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 # Create a dedicated systemd config
@@ -101,25 +87,23 @@ ynh_add_systemd_config --service="${app}" --template="fittrackee.service"
 ynh_add_systemd_config --service="${app}_workers" --template="fittrackee_workers.service"
 
 #=================================================
+# GENERIC FINALIZATION
+#=================================================
 # INTEGRATE SERVICE IN YUNOHOST
+#=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/$app.log"
 
-
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting the systemd services..." --weight=15
+ynh_script_progression --message="Starting systemd services..." --weight=15
 
 # Start a systemd service
 ynh_systemd_action --service_name="${app}" --action="start"  --log_path="/var/log/$app/$app.log" --line_match="Booting worker with pid"
-ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="systemd" --line_match="Started"
+ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="/var/log/$app/$app.log" --line_match="Started"
 
 #=================================================
 # END OF SCRIPT
