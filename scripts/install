@@ -73,7 +73,7 @@ yunohost service add "${app}_workers" --description="Fittrackee task queue servi
 ynh_script_progression --message="Configuring logrotate to manage application logfiles" --weight=1
 
 # Use logrotate to manage application logfile(s)
-ynh_use_logrotate
+ynh_use_logrotate --specific_user=$app
 
 
 
