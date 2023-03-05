@@ -21,10 +21,6 @@ touch /var/log/$app/$app.log
 chown -R $app:www-data /var/log/$app/
 
 
-ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
-chmod 600 $install_dir/.env
-
-set -a; source "$install_dir/.env"; set +a
 
 #=================================================
 # INSTALL DEPENDENCIES
@@ -47,7 +43,15 @@ ynh_app_setting_set --app=$app --key=key --value=$key
 
 ynh_script_progression --message="Setting up source files..." --weight=64
 
+ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
+chmod 600 $install_dir/.env
+
+
+
 chown -R $app:www-data "$install_dir"
+
+
+set -a; source "$install_dir/.env"; set +a
 
 pushd $install_dir
 	mkdir -p .venv
