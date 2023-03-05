@@ -38,6 +38,7 @@ ynh_script_progression --message="Configuring logrotate to manage application lo
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate --specific_user=$app
+touch /var/log/$app/$app.log
 chown -R $app:www-data /var/log/$app/
 
 
