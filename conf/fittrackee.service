@@ -12,6 +12,8 @@ Restart=always
 RestartSec=1
 User=__APP__
 Group=__APP__
+StandardOutput=append:/var/log/__APP__/__APP__.log
+StandardError=inherit
 SyslogIdentifier=__APP__
 EnvironmentFile=__INSTALL_DIR__/.env
 Environment="APP_SECRET_KEY="
