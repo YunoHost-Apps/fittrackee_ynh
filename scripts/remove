@@ -19,7 +19,7 @@ source /usr/share/yunohost/helpers
 # Remove the service from the list of services known by YunoHost (added from `yunohost service add`)
 if ynh_exec_warn_less yunohost service status $app >/dev/null
 then
-	ynh_script_progression --message="Removing $app service integration..." --weight=1
+	ynh_script_progression --message="Removing $app services integration..." --weight=1
 	yunohost service remove $app
 	yunohost service remove ${app}_workers
 fi
@@ -29,43 +29,25 @@ fi
 #=================================================
 ynh_script_progression --message="Stopping and removing the systemd service..." --weight=1
 
-ynh_systemd_action --service_name="${app}" --action="stop" --log_path="/var/log/$app/$app.log" --line_match="Stopped $app"
-ynh_systemd_action --service_name="${app}_workers" --action="stop" --log_path="systemd" --line_match="Stopped $app"
-
 # Remove the dedicated systemd config
 ynh_remove_systemd_config --service="${app}"
 ynh_remove_systemd_config --service="${app}_workers"
 
 
 #=================================================
-# REMOVE APP MAIN DIR
-#=================================================
-ynh_script_progression --message="Removing app main directory..." --weight=1
-
-# Remove the app directory securely
-ynh_secure_remove --file="$install_dir"
-
-#=================================================
 # REMOVE VARIOUS FILES
 #=================================================
-ynh_script_progression --message="Removing various files..."
-
-# Remove the log files
-ynh_secure_remove --file="/var/log/$app"
-
-
-#=================================================
-# REMOVE NGINX CONFIGURATION
-#=================================================
-ynh_script_progression --message="Removing NGINX web server configuration..." --weight=1
+ynh_script_progression --message="Removing various files..."  --weight=5
 
 # Remove the dedicated NGINX config
 ynh_remove_nginx_config
 
-
 ynh_remove_logrotate
 
 ynh_remove_fail2ban_config
+
+# Remove the log files
+ynh_secure_remove --file="/var/log/$app"
 
 
 #=================================================
