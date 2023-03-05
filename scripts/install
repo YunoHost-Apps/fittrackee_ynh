@@ -19,10 +19,29 @@ ynh_script_progression --message="Installing dependencies..." --weight=23
 
 ynh_exec_warn_less python3 -m pip install pipenv
 
+
+
+#=================================================
+# CONFIGURE THE INSTALL SCRIPT
+#=================================================
+ynh_script_progression --message="Installing service script..." --weight=1
+
+# key for the .env __KEY__
+key=$(ynh_string_random --length=45 | base64)
+ynh_app_setting_set --app=$app --key=key --value=$key
+
+
+ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
+chmod 600 $install_dir/.env
+
+chown -R $app:www-data "$install_dir"
+
+set -a; source "$install_dir/.env"; set +a
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Setting up source files..." --weight=64
+
 
 # Set permissions to app files
 # mkdir -p "$install_dir/.venv"
@@ -36,10 +55,22 @@ ynh_script_progression --message="Setting up source files..." --weight=64
 # 	sudo -u $app python3 -m pipenv run jupyterhub upgrade-db 2>&1
 # popd
 
+ynh_script_progression --message="Setting up source files..." --weight=64
+
 pushd $install_dir
 	mkdir -p .venv
 	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
+	ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
 popd
+
+
+#=================================================
+# INITIALIZE DATABASE
+#=================================================
+ynh_script_progression --message="Initializing Fittrackee database..." --weight=1
+
+# ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+
 
 #=================================================
 # System Configuration
@@ -74,32 +105,6 @@ ynh_script_progression --message="Configuring logrotate to manage application lo
 
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate --specific_user=$app
-
-
-
-#=================================================
-# CONFIGURE THE INSTALL SCRIPT
-#=================================================
-ynh_script_progression --message="Installing service script..." --weight=1
-
-# key for the .env __KEY__
-key=$(ynh_string_random --length=45 | base64)
-ynh_app_setting_set --app=$app --key=key --value=$key
-
-
-ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
-chmod 600 $install_dir/.env
-
-chown -R $app:www-data "$install_dir"
-
-set -a; source "$install_dir/.env"; set +a
-
-#=================================================
-# INITIALIZE DATABASE
-#=================================================
-ynh_script_progression --message="Initializing Fittrackee database..." --weight=1
-
-ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
 
 
 
