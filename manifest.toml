@@ -50,7 +50,7 @@ ram.runtime = "50M"
 
     [install.weather_key]
     ask.en = "Insert here the api key from the chosen weather provider"
-    ask.fr = "Insérez ici la clé API du fournisseur de météo choisi".
+    ask.fr = "Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"
 
   [resources]
