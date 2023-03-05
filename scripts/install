@@ -56,8 +56,8 @@ set -a; source "$install_dir/.env"; set +a
 pushd $install_dir
 	mkdir -p .venv
 	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
-	pipenv shell
-	ftcli db upgrade
+	
+	
 popd
 
 
@@ -66,9 +66,9 @@ popd
 #=================================================
 # INITIALIZE DATABASE
 #=================================================
-# ynh_script_progression --message="Initializing database..." --weight=1
+ ynh_script_progression --message="Initializing database..." --weight=1
 
-# ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
 
 
 #=================================================
