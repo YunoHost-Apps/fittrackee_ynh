@@ -45,7 +45,7 @@ ram.runtime = "50M"
     ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
     help.en = "As Darksky is deprecating his api, it is suggested to opt for Visual Crossing"
     help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
-    type = "string"
+    type = "select"
     Choices = ["darksky", "visualcrossing"]
 
     [install.weather_key]
