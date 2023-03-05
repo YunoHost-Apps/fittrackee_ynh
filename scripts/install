@@ -11,6 +11,7 @@ source /usr/share/yunohost/helpers
 
 admin_mail=$(ynh_user_get_info --username=$admin --key=username)
 
+
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
@@ -125,7 +126,7 @@ ynh_script_progression --message="Starting systemd services..." --weight=15
 
 # Start a systemd service
 ynh_systemd_action --service_name="${app}" --action="start"  --log_path="/var/log/$app/$app.log" --line_match="Booting worker with pid"
-ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="systemd" --line_match="Succeeded"
+ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="systemd" --line_match="Started"
 
 #=================================================
 # END OF SCRIPT
