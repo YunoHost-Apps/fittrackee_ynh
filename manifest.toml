@@ -46,7 +46,7 @@ ram.runtime = "50M"
     help.en = "As Darksky is deprecating his api, it is suggested to opt for Visual Crossing"
     help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
     type = "select"
-    choices = ["    ","darksky", "visualcrossing"]
+    choices = ["","darksky", "visualcrossing"]
 
     [install.weather_key]
     ask.en = "Insert here the api key from the chosen weather provider"
@@ -68,7 +68,6 @@ ram.runtime = "50M"
 
     [resources.apt]
     packages = "postgresql, postgresql-contrib, python3-venv"
-
 
     [resources.database]
     type = "postgresql"
