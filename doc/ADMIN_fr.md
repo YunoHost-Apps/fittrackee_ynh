@@ -7,4 +7,4 @@ pushd $install_dir/
 ```
 
 
-$install_dir doit être modifié en l’adresse du répertoire où FitTrackee est installé. La majorité du temps ce sera /var/www/fittrackee
+`$install_dir` doit être modifié en l’adresse du répertoire où FitTrackee est installé. La majorité du temps ce sera `/var/www/fittrackee/`.
