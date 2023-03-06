@@ -47,11 +47,13 @@ ram.runtime = "50M"
     help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
     type = "select"
     choices = ["","darksky", "visualcrossing"]
+    default = ""
 
     [install.weather_key]
     ask.en = "Insert here the api key from the chosen weather provider"
     ask.fr = "Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"
+    default = ""
 
   [resources]
     [resources.system_user]
