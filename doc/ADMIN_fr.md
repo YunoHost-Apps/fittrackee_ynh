@@ -1,6 +1,6 @@
 Après l’installation, vous pouvez créer un utilisateur via le navigateur.
 
-Pour faire de cet utilisateur un administrateru, vous devez utiliser la ligne de commande :
+Pour faire de cet utilisateur un administrateur, vous devez utiliser la ligne de commande :
 
 ```python
 pushd $install_dir/
