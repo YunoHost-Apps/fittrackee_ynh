@@ -103,9 +103,7 @@ yunohost service add "${app}_workers" --description="Fittrackee task queue servi
 # GENERIC FINALIZATION
 #=================================================
 
-pushd $install_dir
-     pipenv shell
-popd
+
 
 #=================================================
 # START SYSTEMD SERVICE
