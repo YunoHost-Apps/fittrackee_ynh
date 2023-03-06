@@ -35,13 +35,6 @@ ynh_systemd_action --action="stop" --service_name="${app}_workers" --log_path="s
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Upgrading source files..." --weight=1
-
-	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$install_dir" --keep=".env"
-fi
 
 mkdir -p "$install_dir"
 chmod -R o-rwx "$install_dir"
