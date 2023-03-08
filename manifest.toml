@@ -35,7 +35,7 @@ ram.runtime = "50M"
     [install.path]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "path"
-    default = "/helloworld"
+    default = "/fittrackee"
 
 
     [install.init_main_permission]
@@ -53,12 +53,14 @@ ram.runtime = "50M"
     help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
     type = "select"
     choices = ["", "darksky", "visualcrossing"]
+    default = ""
     optional = true
 
     [install.weather_key]
     ask.en = "(Optional) Insert here the api key from the chosen weather provider"
     ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"
+    default = ""
     optional = true
 
   [resources]
