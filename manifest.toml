@@ -2,10 +2,10 @@ packaging_format = 2
 
 id = "fittrackee"
 name = "FitTrackee"
-description.en = " Self-hosted outdoor activity tracker 🚴"
-description.fr = " Traqueur d’activités extérieures auto-hébergé 🚴 "
+description.en = "Self-hosted outdoor activity tracker 🚴"
+description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.13~ynh1"
+version = "0.7.14~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -39,22 +39,22 @@ ram.runtime = "50M"
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "user"
 
-#    [install.weather_provider]
- #   ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
-#    ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
- #   help.en = "As Darksky is deprecating his api, it is suggested to opt for Visual Crossing"
-#    help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
-#    type = "select"
- #   choices = ["", "darksky", "visualcrossing"]
-   # default = ""
-   # optional = true
+    [install.weather_provider]
+    ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
+    ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
+    help.en = "As Darksky is deprecating his api, it is suggested to opt for Visual Crossing"
+    help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
+    type = "select"
+    choices = ["", "darksky", "visualcrossing"]
+    default = "visualcrossing"
+    optional = true
 
-  #  [install.weather_key]
-#    ask.en = "(Optional) Insert here the api key from the chosen weather provider"
-  #  ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
-  #  type = "string"
- #   default = false
-  #  optional = true
+    [install.weather_key]
+    ask.en = "(Optional) Insert here the api key from the chosen weather provider"
+    ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
+    type = "string"
+    default = false
+    optional = true
 
   [resources]
     [resources.system_user]
