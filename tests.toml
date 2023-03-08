@@ -12,6 +12,7 @@ test_format = 1.0
     # Default args to use for install
     # -------------------------------
     
+    args.weather_provider = "visualcrossing"
    
     # -------------------------------
     # Commits to test upgrade from
