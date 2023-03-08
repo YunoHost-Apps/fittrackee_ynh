@@ -22,7 +22,7 @@ ynh_script_progression --message="Configuring logrotate to manage application lo
 # Use logrotate to manage application logfile(s)
 ynh_use_logrotate --specific_user=$app
 touch /var/log/$app/$app.log
-touch /var/log/$app/$app_workers.log
+touch /var/log/$app/${app}_workers.log
 chown -R $app:www-data /var/log/$app/
 
 #=================================================
@@ -67,7 +67,7 @@ systemctl enable "${app}_workers.service" --quiet
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
-yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/$app_workers.log"
+yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
 
 #=================================================
 # START SYSTEMD SERVICE
@@ -75,7 +75,7 @@ yunohost service add "${app}_workers" --description="Fittrackee task queue servi
 ynh_script_progression --message="Starting a systemd service..." --weight=1
 
 ynh_systemd_action --service_name="${app}" --action="start" --log_path="/var/log/$app/$app.log" --line_match="Booting worker with pid"
-ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="/var/log/$app/$app_workers.log" --line_match="Started"
+ynh_systemd_action --service_name="${app}_workers" --action="start" --log_path="/var/log/$app/${app}_workers.log" --line_match="Started"
 
 #=================================================
 # GENERIC FINALIZATION
