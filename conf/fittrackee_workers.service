@@ -29,6 +29,9 @@ WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
 
 
+
+
+
 NoNewPrivileges=yes
 PrivateTmp=yes
 PrivateDevices=yes
