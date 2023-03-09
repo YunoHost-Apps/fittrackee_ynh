@@ -30,6 +30,7 @@ ram.runtime = "50M"
     [install.domain]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
+    full_domain = true
       
     [install.init_main_permission]
     type = "group"
