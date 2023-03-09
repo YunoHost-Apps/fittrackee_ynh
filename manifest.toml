@@ -2,10 +2,10 @@ packaging_format = 2
 
 id = "fittrackee"
 name = "FitTrackee"
-description.en = " Self-hosted outdoor activity tracker 🚴"
-description.fr = " Traqueur d’activités extérieures auto-hébergé 🚴 "
+description.en = "Self-hosted outdoor activity tracker 🚴"
+description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.13~ynh1"
+version = "0.7.14~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -20,8 +20,8 @@ code = "https://github.com/SamR1/FitTrackee"
 yunohost = ">= 11.1.13"
 architectures = "all" 
 multi_instance = true
-ldap = "false"
-sso = "false" 
+ldap = false
+sso = false 
 disk = "50M" 
 ram.build = "50M" 
 ram.runtime = "50M" 
@@ -30,8 +30,7 @@ ram.runtime = "50M"
     [install.domain]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
-    full_domain = true
-
+      
     [install.init_main_permission]
     type = "group"
     default = "visitors"
@@ -47,12 +46,14 @@ ram.runtime = "50M"
     help.fr = "Comme Darksky déprécie son API, il est suggéré d'opter pour Visual Crossing"
     type = "select"
     choices = ["", "darksky", "visualcrossing"]
+    default = "visualcrossing"
     optional = true
 
     [install.weather_key]
     ask.en = "(Optional) Insert here the api key from the chosen weather provider"
     ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"
+    default = false
     optional = true
 
   [resources]

@@ -12,7 +12,7 @@ Restart=always
 RestartSec=1
 User=__APP__
 Group=__APP__
-StandardOutput=append:/var/log/__APP__/__APP__.log
+StandardOutput=append:/var/log/__APP__/__APP___workers.log
 StandardError=inherit
 SyslogIdentifier=__APP___workers
 EnvironmentFile=__INSTALL_DIR__/.env
@@ -27,6 +27,9 @@ Environment="SENDER_EMAIL="
 Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
+
+
+
 
 
 NoNewPrivileges=yes

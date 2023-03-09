@@ -16,9 +16,9 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
- Traqueur d’activités extérieures auto-hébergé 🚴 
+Traqueur d’activités extérieures auto-hébergé 🚴
 
-**Version incluse :** 0.7.13~ynh1
+**Version incluse :** 0.7.14~ynh1
 
 ## Captures d’écran
 
