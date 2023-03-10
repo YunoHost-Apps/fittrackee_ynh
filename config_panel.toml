@@ -17,7 +17,6 @@ services = ["__APP__", "__APP___workers"]
     name.en = "Configuration options"
     name.fr = "Options de configuration"
 
-
         [main.config.data_dir]
         ask.en = "Change data directory"
         ask.fr = "Changer le répertoire de données"
