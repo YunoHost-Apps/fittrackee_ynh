@@ -1,0 +1,47 @@
+
+## -----------------------------------------------------------------------------
+## IMPORTANT: In accordance with YunoHost's spirit, please keep things simple and 
+## do not overwhelm the admin with tons of misunderstandable or advanced settings.
+## -----------------------------------------------------------------------------
+
+version = "1.0"
+
+
+[main]
+name.en = "Main configuration"
+name.fr = "Configuration principale"
+services = ["__APP__", "__APP___workers"]
+
+     
+    [main.config]
+    name.en = "Configuration options"
+    name.fr = "Options de configuration"
+
+        [main.config.data_dir]
+        ask.en = "Change data directory"
+        ask.fr = "Changer le répertoire de données"
+        type = "path"
+        default = "/home/yunohost.app/__APP__/"
+        help.en = "Change the data directory where are stored all the uploaded .gpx files and the profile pictures"
+        help.fr = "Change le répertoire de données où sont stockés tous les fichiers .gpx téléversés et les photos de profil"
+        bind = "UPLOAD_FOLDER:/var/www/__APP__/.env"
+
+        [main.config.weather_provider]
+        ask.en = "Change weather provider"
+        ask.fr = "Changer le fournisseur météo"
+        type = "select"
+        choices = ["", "darksky", "visualcrossing"]
+        default = "visualcrossing"
+        help.en = "Change your weather provider by choosing one of the proposed ones"
+        help.fr = "Changer votre fournisseur météo en choisissant un de ceux qui vous sont proposés"
+        bind = "WEATHER_API_PROVIDER:/var/www/__APP__/.env"
+
+        [main.config.WEATHER_API_KEY]
+        ask.en = "Change weather api key"
+        ask.fr = "Changer la clé api pour la météo"
+        type = "string"
+        help.en = "Set the api key given by the chosen weather provider"
+        help.fr = "Insérer la clé api donnée par le fournisseur météo choisi"
+        bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
+
+   
