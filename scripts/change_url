@@ -1,0 +1,56 @@
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+source _common.sh
+source /usr/share/yunohost/helpers
+
+#=================================================
+# LOAD SETTINGS
+#=================================================
+
+admin_mail=$(ynh_user_get_info --username=$admin --key=username)
+
+#=================================================
+# STANDARD UPGRADE STEPS
+#=================================================
+# STOP SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Stopping a systemd service..." --weight=1
+
+ynh_systemd_action --action="stop" --service_name="${app}" 
+ynh_systemd_action --action="stop" --service_name="${app}_workers"
+
+#=================================================
+# MODIFY URL IN NGINX CONF
+#=================================================
+ynh_script_progression --message="Updating NGINX web server configuration..." --weight=1
+
+ynh_change_url_nginx_config
+
+#=================================================
+# MODIFY THE CONFIG FILE
+#=================================================
+ynh_script_progression --message="Modifying a config file..." --weight=1
+
+domain=$new_domain
+ynh_add_config --template="../conf/env.production" --destination="$install_dir/config/.env"
+
+#=================================================
+# START SYSTEMD SERVICE
+#=================================================
+ynh_script_progression --message="Starting the systemd services..." --weight=15
+
+# Start a systemd service
+ynh_systemd_action --service_name="${app}" --action="start"  
+ynh_systemd_action --service_name="${app}_workers" --action="start" 
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression --message="Upgrade of $app completed" --last
