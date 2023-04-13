@@ -1,14 +1,11 @@
-After the installation, you can create your first user in your browser.
+After the installation, you can login with the user and password you choose before the installation.
 
-Then, to change it as admin user, you have to go to cli:
+If you have to use the [command line interface (cli)](https://samr1.github.io/FitTrackee/cli.html), you can go like this:
 
 ```
  pushd $install_dir/
     pipenv shell
-    ftcli users update <user> --set-admin true
+    ftcli [OPTIONS] COMMAND [ARGS]...
 ```
 
-
 `$install_dir` has to be changed with the actual FitTrackee installed directory. Most of the time it will be `/var/www/fittrackee/`.
-
-`<user>` has to be changed with the actual username the account creation has been done.
