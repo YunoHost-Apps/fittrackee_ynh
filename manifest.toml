@@ -40,6 +40,11 @@ ram.runtime = "50M"
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "user"
 
+    [install.password]
+    help.en = "Choose a password for your admin user here."
+    help.fr = "Choisissez un mot de passe pour l’utilisateur admin ici."
+    type = "password"
+
     [install.weather_provider]
     ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
     ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
