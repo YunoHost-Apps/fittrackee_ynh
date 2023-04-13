@@ -16,9 +16,10 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 
 ## Vue d’ensemble
 
-Traqueur d’activités extérieures auto-hébergé 🚴
+FitTrackee vous permet de suivre vos activités de plein air (séances d'entraînement) à partir de fichiers gpx et de conserver vos données sur votre propre serveur.
+Aucune application mobile n'a encore été développée, mais plusieurs applications mobiles existantes peuvent stocker localement les données des séances d'entraînement et les exporter dans un fichier gpx.
 
-**Version incluse :** 0.7.14~ynh3
+**Version incluse :** 0.7.15~ynh1
 
 ## Captures d’écran
 

@@ -9,7 +9,8 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-admin_mail=$(ynh_user_get_info --username=$admin --key=username)
+admin=$(ynh_user_get_info --username=$admin --key=username)
+admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
 #=================================================
 # LOGROTATE
@@ -67,6 +68,10 @@ popd
  ynh_script_progression --message="Initializing database..." --weight=1
 
 ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+
+ynh_exec_warn_less $install_dir/.venv/bin/ftcli users create $admin --email $admin_mail --password $password
+
+ynh_exec_warn_less $install_dir/.venv/bin/ftcli users update $admin --set-admin true
 
 #=================================================
 # System Configuration
