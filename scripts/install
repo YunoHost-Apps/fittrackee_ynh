@@ -9,9 +9,9 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
-admin=$(ynh_user_get_info --username=$admin --key="username")
-admin_mail=$(ynh_user_get_info --username="$admin" --key="mail")
-admin_password=$(ynh_user_get_info --username="$admin" --key="password")
+admin=$(ynh_user_get_info --username=$admin --key=username)
+admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
+admin_password=$(ynh_user_get_info --username=$admin --key=password)
 
 #=================================================
 # LOGROTATE
