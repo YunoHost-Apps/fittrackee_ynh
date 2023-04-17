@@ -76,7 +76,7 @@ ram.runtime = "50M"
     main.default = 5000
 
     [resources.apt]
-    packages = "postgresql, postgresql-contrib, python3-venv"
+    packages = "postgresql, postgresql-contrib, python3-venv libopenjp2-7"
 
     [resources.database]
     type = "postgresql"
