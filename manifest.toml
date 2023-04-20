@@ -74,7 +74,7 @@ ram.runtime = "50M"
     main.auth_header = false
     main.protected = true
     
-    admin.url = "/admin
+    admin.url = "/admin"
     admin.show_tile = false
     admin.auth_header = false
     admin.allowed = "admins"
