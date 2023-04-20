@@ -5,7 +5,7 @@ name = "FitTrackee"
 description.en = "Self-hosted outdoor activity tracker 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.15~ynh2"
+version = "0.7.15~ynh3"
 
 maintainers = ["Thovi98"]
 
@@ -72,7 +72,6 @@ ram.runtime = "50M"
     [resources.permissions]
     main.url = "/"
     main.auth_header = false
-    main.protected = true
     
     [resources.ports]
     main.default = 5000
