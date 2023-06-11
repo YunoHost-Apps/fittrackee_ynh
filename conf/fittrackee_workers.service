@@ -26,7 +26,7 @@ Environment="EMAIL_URL="
 Environment="SENDER_EMAIL="
 Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/.venv/bin/flask worker --processes 2
+ExecStart=__INSTALL_DIR__/venv/bin/flask worker --processes 2
 
 
 

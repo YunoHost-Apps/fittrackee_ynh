@@ -23,16 +23,6 @@ touch /var/log/$app/${app}_workers.log
 touch /var/log/$app/gunicorn.log
 chown -R $app:www-data /var/log/$app/
 
-
-
-#=================================================
-# INSTALL DEPENDENCIES
-#=================================================
-ynh_script_progression --message="Installing dependencies..." --weight=23
-
-ynh_exec_warn_less python3 -m pip install pipenv
-
-
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
@@ -49,29 +39,32 @@ ynh_script_progression --message="Setting up source files..." --weight=64
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
 
-
-
 chown -R $app:www-data "$install_dir"
-
 
 set -a; source "$install_dir/.env"; set +a
 
-pushd $install_dir
-	mkdir -p .venv
-	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
-popd
 
+#=================================================
+# INSTALL PYTHON DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing Python dependencies..." --weight=3
+
+pushd $install_dir
+	python3 -m venv $install_dir/venv
+	source $install_dir/venv/bin/activate
+	ynh_exec_warn_less pip install fittrackee==$fittrackee_version
+popd
 
 #=================================================
 # INITIALIZE DATABASE
 #=================================================
  ynh_script_progression --message="Initializing database..." --weight=1
 
-ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+ynh_exec_warn_less $install_dir/venv/bin/ftcli db upgrade
 
-ynh_exec_warn_less $install_dir/.venv/bin/ftcli users create $admin --email $admin_mail --password $password
+ynh_exec_warn_less $install_dir/venv/bin/ftcli users create $admin --email $admin_mail --password $password
 
-ynh_exec_warn_less $install_dir/.venv/bin/ftcli users update $admin --set-admin true
+ynh_exec_warn_less $install_dir/venv/bin/ftcli users update $admin --set-admin true
 
 #=================================================
 # System Configuration
