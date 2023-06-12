@@ -38,7 +38,6 @@ ynh_systemd_action --action="stop" --service_name="${app}_workers"
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=23
 
-ynh_exec_warn_less python3 -m pip install pipenv
 
 chmod -R o-rwx "$install_dir"
 chown -R $app: "$install_dir"
@@ -58,6 +57,8 @@ set -a; source "$install_dir/.env"; set +a
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Installing Python dependencies..." --weight=3
+
+ynh_secure_remove $install_dir/.venv
 
 pushd $install_dir
 	python3 -m venv $install_dir/venv
