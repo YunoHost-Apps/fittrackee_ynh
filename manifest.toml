@@ -5,7 +5,7 @@ name = "FitTrackee"
 description.en = "Self-hosted outdoor activity tracker 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.17~ynh1"
+version = "0.7.18~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -77,7 +77,7 @@ ram.runtime = "50M"
     main.default = 5000
 
     [resources.apt]
-    packages = "postgresql, postgresql-contrib, python3-venv libopenjp2-7"
+    packages = "postgresql, postgresql-contrib, python3, python3-venv, libopenjp2-7"
 
     [resources.database]
     type = "postgresql"
