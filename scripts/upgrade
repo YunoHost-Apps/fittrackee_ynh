@@ -38,27 +38,12 @@ ynh_systemd_action --action="stop" --service_name="${app}_workers"
 #=================================================
 ynh_script_progression --message="Installing dependencies..." --weight=23
 
-ynh_exec_warn_less python3 -m pip install pipenv
 
-
-
-
-#=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-
-
-mkdir -p "$install_dir"
 chmod -R o-rwx "$install_dir"
 chown -R $app: "$install_dir"
 
-pushd $install_dir
-	mkdir -p .venv
-	PIPENV_VENV_IN_PROJECT="enabled" PIPENV_SKIP_LOCK=true ynh_exec_warn_less python3 -m pipenv install fittrackee==$fittrackee_version python-dotenv
-popd
-
 #=================================================
-# CONFIGURE THEN INSTALL SCRIPT AND DEPENDENCIES
+# CONFIGURE THE INSTALL SCRIPT
 #=================================================
 ynh_script_progression --message="Installing service script..." --weight=1
 
@@ -69,11 +54,25 @@ chown $app: "$install_dir/.env"
 set -a; source "$install_dir/.env"; set +a
 
 #=================================================
+# INSTALL PYTHON DEPENDENCIES
+#=================================================
+ynh_script_progression --message="Installing Python dependencies..." --weight=3
+
+ynh_secure_remove $install_dir/.venv
+
+pushd $install_dir
+	python3 -m venv $install_dir/venv
+	source $install_dir/venv/bin/activate
+	ynh_exec_warn_less pip install fittrackee==$fittrackee_version toml pyyaml
+popd
+
+
+#=================================================
 # Update DATABASE
 #=================================================
 ynh_script_progression --message="Upgrading database..." --weight=1
 
-ynh_exec_warn_less $install_dir/.venv/bin/ftcli db upgrade
+ynh_exec_warn_less $install_dir/venv/bin/ftcli db upgrade
 
 
 #=================================================
