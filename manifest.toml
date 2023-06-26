@@ -5,7 +5,7 @@ name = "FitTrackee"
 description.en = "Self-hosted outdoor activity tracker 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.17~ynh1"
+version = "0.7.18~ynh1"
 
 maintainers = ["Thovi98"]
 
