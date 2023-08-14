@@ -52,7 +52,6 @@ ynh_script_progression --message="Installing Python dependencies..." --weight=3
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
-	# Upgrade pip for Cryptography to work
 	ynh_exec_warn_less pip install --upgrade pip
 	ynh_exec_warn_less pip install fittrackee==$fittrackee_version toml pyyaml
 popd
