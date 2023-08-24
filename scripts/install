@@ -49,6 +49,19 @@ set -a; source "$install_dir/.env"; set +a
 #=================================================
 ynh_script_progression --message="Installing Python dependencies..." --weight=3
 
+if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "armel" ]
+then
+# Install rustup is not already installed 
+# We need this to be able to install cryptgraphy on ARM hardware
+export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sbin"
+    if [ -e $install_dir/.rustup ]; then
+    sudo -u "$app" env PATH=$PATH rustup update
+    else
+    sudo -u "$app" bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
+    fi
+fi
+
+
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
