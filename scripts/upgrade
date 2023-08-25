@@ -72,6 +72,9 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
     fi
 fi
 
+rustup install stable
+rustup default stable
+
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
