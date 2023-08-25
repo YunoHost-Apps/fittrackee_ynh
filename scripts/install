@@ -59,10 +59,11 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
     else
     sudo -u "$app" bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
     fi
-fi
 
 rustup install stable
 rustup default stable
+
+fi
 
 pushd $install_dir
 	python3 -m venv $install_dir/venv
