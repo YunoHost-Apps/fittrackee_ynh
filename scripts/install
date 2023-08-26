@@ -60,9 +60,6 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
     sudo -u "$app" bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
     fi
 
-sudo -u "$app" env PATH=$PATH rustup install stable
-sudo -u "$app" env PATH=$PATH rustup default stable
-
 fi
 
 pushd $install_dir
