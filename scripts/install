@@ -107,7 +107,7 @@ ynh_add_systemd_config --service="${app}_workers" --template="fittrackee_workers
 # INTEGRATE SERVICE IN YUNOHOST
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log" --log="/var/log/$app/gunicorn.log"
+yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
 
 
