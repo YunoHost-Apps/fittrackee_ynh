@@ -13,7 +13,7 @@ admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
 # Retrieve YunoHost main domain
-$main_domain = exec('cat /etc/yunohost/current_host');
+main_domain=$(cat /etc/yunohost/current_host)
 
 #=================================================
 # LOGROTATE
