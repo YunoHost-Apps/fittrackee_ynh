@@ -11,9 +11,6 @@ source /usr/share/yunohost/helpers
 
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
-mail_user="$app"
-mail_password="$mail_pwd"
-mail_domain="$domain"
 
 #=================================================
 # LOGROTATE
