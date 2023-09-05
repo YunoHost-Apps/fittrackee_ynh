@@ -44,4 +44,28 @@ services = ["__APP__", "__APP___workers"]
         help.fr = "Insérer la clé api donnée par le fournisseur météo choisi"
         bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
 
+        [main.config.USER_MAIL]
+        ask.en = "Configure the user mail"
+        ask.fr = "Configurer le courriel utilisateur"
+        type = "string"
+        bind = "USER_MAIL:/var/www/__APP__/.env"
+
+        [main.config.MAIL_PASSWORD]
+        ask.en = "Configure the password of the determined mail user"
+        ask.fr = "Configurer le mot de passe de l’utilisateur mail choisi"
+        type = "string"
+        bind = "MAIL_PASSWORD:/var/www/__APP__/.env"
+
+        [main.config.MAIL_DOMAIN]
+        ask.en = "Configure the server address"
+        ask.fr = "Configurer l’adresse du serveur"
+        type = "string"
+        help.en = "e.g. mydomain.com"
+        help.fr = "ex. : mondomain.com"
+        bind = "MAIL_DOMAIN:/var/www/__APP__/.env"
+
+        
+
+        
+
    
