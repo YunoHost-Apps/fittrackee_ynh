@@ -44,11 +44,11 @@ services = ["__APP__", "__APP___workers"]
         help.fr = "Insérer la clé api donnée par le fournisseur météo choisi"
         bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
 
-        [main.config.USER_MAIL]
+        [main.config.mail_user]
         ask.en = "Configure the user mail"
         ask.fr = "Configurer le courriel utilisateur"
         type = "string"
-        bind = "USER_MAIL:/var/www/__APP__/.env"
+        bind = "MAIL_USER:/var/www/__APP__/.env"
 
         [main.config.MAIL_PASSWORD]
         ask.en = "Configure the password of the determined mail user"
