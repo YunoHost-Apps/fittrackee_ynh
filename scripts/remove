@@ -9,6 +9,12 @@
 source _common.sh
 source /usr/share/yunohost/helpers
 
+#=================================================
+# LOAD SETTINGS
+#=================================================
+ynh_script_progression --message="Loading installation settings..."
+
+redis_db=$(ynh_app_setting_get --app=$app --key=redis_db)
 
 #=================================================
 # STANDARD REMOVE
@@ -46,6 +52,9 @@ ynh_remove_logrotate
 
 # Remove the log files
 ynh_secure_remove --file="/var/log/$app"
+
+# Remove the redis database
+ynh_redis_remove_db "$redis_db"
 
 
 #=================================================

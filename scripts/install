@@ -30,6 +30,11 @@ chown -R $app:www-data /var/log/$app/
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
 
+# Configure redis
+redis_db=$(ynh_redis_get_free_db)
+ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
+
+
 # key for the .env __KEY__
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --app=$app --key=key --value=$key
