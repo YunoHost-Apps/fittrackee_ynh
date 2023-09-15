@@ -23,16 +23,6 @@ admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 upgrade_type=$(ynh_check_app_version_changed)
 
 #=================================================
-# ENSURE DOWNWARD COMPATIBILITY
-#=================================================
-
-# If redis_db doesn't exist, create it
-if [ -z $redis_db ]; then
-	redis_db=$(ynh_redis_get_free_db)
-	ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
-fi
-
-#=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -57,6 +47,7 @@ chown -R $app: "$install_dir"
 #=================================================
 ynh_script_progression --message="Installing service script..." --weight=1
 
+redis_db=$(ynh_redis_get_free_db)
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
 chown $app: "$install_dir/.env"
