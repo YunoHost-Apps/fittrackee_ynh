@@ -44,6 +44,20 @@ services = ["__APP__", "__APP___workers"]
         help.fr = "Insérer la clé api donnée par le fournisseur météo choisi"
         bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
 
+        [main.config.email_url]
+        ask.en = "Change SMTP mail address"
+        ask.fr = "Changer l’adresse courriel SMTP"
+        type = "string"
+        help.en = "Has to be like this: smtp://username:password@example.com:587/?tls=True"
+        help.fr = "Doit avoir la forme suivante : smtp://username:password@example.com:587/?tls=True"
+        bind = "email_url:/var/www/__APP__/.env"
+
+        [main.config.sender_email]
+        ask.en = "Change sender email"
+        ask.fr = "Changer l’adresse courriel d’envoi"
+        type = "email"
+        bind = "sender_email:/var/www/__APP__/.env"
+
                
 
    
