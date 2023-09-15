@@ -30,6 +30,11 @@ chown -R $app:www-data /var/log/$app/
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
 
+# Configure redis
+redis_db=$(ynh_redis_get_free_db)
+ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
+
+
 # key for the .env __KEY__
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --app=$app --key=key --value=$key
@@ -59,14 +64,13 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
     else
     sudo -u "$app" bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
     fi
-
 fi
 
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
-        ynh_exec_warn_less pip install --upgrade pip
-	ynh_exec_warn_less pip install fittrackee==$fittrackee_version toml pyyaml
+        ynh_exec_warn_less pip install --upgrade pip wheel toml pyyaml
+	ynh_exec_warn_less pip install fittrackee==$fittrackee_version
 popd
 
 #=================================================

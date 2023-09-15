@@ -47,6 +47,7 @@ chown -R $app: "$install_dir"
 #=================================================
 ynh_script_progression --message="Installing service script..." --weight=1
 
+redis_db=$(ynh_redis_get_free_db)
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 chmod 600 $install_dir/.env
 chown $app: "$install_dir/.env"
@@ -70,17 +71,13 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
     else
     sudo -u "$app" bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
     fi
-
-sudo -u "$app" env PATH=$PATH rustup install stable
-sudo -u "$app" env PATH=$PATH rustup default stable
-
 fi
 
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
-        ynh_exec_warn_less pip install --upgrade pip
-	ynh_exec_warn_less pip install fittrackee==$fittrackee_version toml pyyaml
+        ynh_exec_warn_less pip install --upgrade pip wheel toml pyyaml
+	ynh_exec_warn_less pip install fittrackee==$fittrackee_version
 popd
 
 
