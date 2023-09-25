@@ -39,7 +39,7 @@ ynh_change_url_nginx_config
 ynh_script_progression --message="Modifying a config file..." --weight=1
 
 domain=$new_domain
-ynh_add_config --template="../conf/env.production" --destination="$install_dir/config/.env"
+ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
 
 #=================================================
 # START SYSTEMD SERVICE
