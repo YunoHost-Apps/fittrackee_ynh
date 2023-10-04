@@ -19,7 +19,7 @@ Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) po
 FitTrackee vous permet de suivre vos activités de plein air (séances d'entraînement) à partir de fichiers gpx et de conserver vos données sur votre propre serveur.
 Aucune application mobile n'a encore été développée, mais plusieurs applications mobiles existantes peuvent stocker localement les données des séances d'entraînement et les exporter dans un fichier gpx.
 
-**Version incluse :** 0.7.23~ynh2
+**Version incluse :** 0.7.24~ynh1
 
 ## Captures d’écran
 
@@ -30,7 +30,6 @@ Aucune application mobile n'a encore été développée, mais plusieurs applicat
 * Site officiel de l’app : <https://samr1.github.io/FitTrackee>
 * Documentation officielle de l’admin : <https://samr1.github.io/FitTrackee>
 * Dépôt de code officiel de l’app : <https://github.com/SamR1/FitTrackee>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_fittrackee>
 * Signaler un bug : <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>
 
 ## Informations pour les développeurs
