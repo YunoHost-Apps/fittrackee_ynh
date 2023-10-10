@@ -17,7 +17,7 @@ admindoc = "https://samr1.github.io/FitTrackee"
 code = "https://github.com/SamR1/FitTrackee"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.5"
 architectures = "all"
 multi_instance = true
 ldap = false
