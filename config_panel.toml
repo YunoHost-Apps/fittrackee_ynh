@@ -48,8 +48,8 @@ services = ["__APP__", "__APP___workers"]
         ask.en = "Change SMTP mail address"
         ask.fr = "Changer l’adresse courriel SMTP"
         type = "string"
-        help.en = "Has to be like this: smtp://username:password@example.com:587/?tls=True"
-        help.fr = "Doit avoir la forme suivante : smtp://username:password@example.com:587/?tls=True"
+        help.en = "Has to be like this: smtp://username:password@example.com:587/?tls=True. /!\ Please backup your original credentials for the case you want to reset it. "
+        help.fr = "Doit avoir la forme suivante : smtp://username:password@example.com:587/?tls=True. /!\ Veuillez sauvegarder vos coordonnées initiales au cas où vous voudriez les réinitialiser."
         bind = "email_url:/var/www/__APP__/.env"
 
         [main.config.sender_email]
