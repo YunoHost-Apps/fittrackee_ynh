@@ -32,12 +32,6 @@ WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/venv/bin/gunicorn -b 127.0.0.1:__PORT__ "fittrackee:create_app()" --error-logfile /var/log/__APP__/__APP__.log
 
 
-
-
-
-
-
-
 # Denying access to capabilities that should not be relevant for webapps
 # Doc: https://man7.org/linux/man-pages/man7/capabilities.7.html
 CapabilityBoundingSet=~CAP_RAWIO CAP_MKNOD

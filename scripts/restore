@@ -23,7 +23,6 @@ ynh_script_progression --message="Configuring logrotate to manage application lo
 ynh_use_logrotate --specific_user=$app
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}_workers.log
-touch /var/log/$app/gunicorn.log
 chown -R $app:www-data /var/log/$app/
 
 #=================================================
