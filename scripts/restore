@@ -23,7 +23,6 @@ ynh_script_progression --message="Configuring logrotate to manage application lo
 ynh_use_logrotate --specific_user=$app
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}_workers.log
-touch /var/log/$app/gunicorn.log
 chown -R $app:www-data /var/log/$app/
 
 #=================================================
@@ -67,7 +66,7 @@ systemctl enable "${app}_workers.service" --quiet
 #=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
-yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log" --log="/var/log/$app/gunicorn.log"
+yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
 
 #=================================================

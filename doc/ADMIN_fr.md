@@ -4,7 +4,7 @@ Si vous avez besoin d’utiliser la [ligne de commande](https://samr1.github.io/
 
 ```
  pushd $install_dir/
-    pipenv shell
+    source $install_dir/venv/bin/activate
     ftcli [OPTIONS] COMMAND [ARGS]...
 ```
 
