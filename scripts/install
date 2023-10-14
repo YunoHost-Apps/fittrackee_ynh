@@ -14,6 +14,7 @@ admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
 #=================================================
 # LOGROTATE
+#=================================================
 ynh_script_progression --message="Configuring logrotate to manage application logfiles" --weight=1
 
 # Use logrotate to manage application logfile(s)
@@ -24,7 +25,6 @@ chown -R $app:www-data /var/log/$app/
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
 #=================================================
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
@@ -90,6 +90,7 @@ ynh_script_progression --message="Adding system configurations related to $app .
 
 #=================================================
 # NGINX CONFIGURATION
+#=================================================
 ynh_script_progression --message="Configuring NGINX web server..." --weight=1
 
 # Create a dedicated NGINX config
@@ -97,6 +98,7 @@ ynh_add_nginx_config
 
 #=================================================
 # SETUP SYSTEMD
+#=================================================
 ynh_script_progression --message="Configuring a systemd service..." --weight=1
 
 # Create a dedicated systemd config
@@ -105,15 +107,14 @@ ynh_add_systemd_config --service="${app}_workers" --template="fittrackee_workers
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
+#=================================================
 ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
 
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
 
-
 #=================================================
 # GENERIC FINALIZATION
-#=================================================
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================

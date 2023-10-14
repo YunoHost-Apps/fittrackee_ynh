@@ -39,7 +39,6 @@ ynh_script_progression --message="Stopping and removing the systemd service..." 
 ynh_remove_systemd_config --service="${app}"
 ynh_remove_systemd_config --service="${app}_workers"
 
-
 #=================================================
 # REMOVE VARIOUS FILES
 #=================================================
@@ -55,7 +54,6 @@ ynh_secure_remove --file="/var/log/$app"
 
 # Remove the redis database
 ynh_redis_remove_db "$redis_db"
-
 
 #=================================================
 # END OF SCRIPT
