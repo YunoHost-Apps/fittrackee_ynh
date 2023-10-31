@@ -31,6 +31,7 @@ No mobile app has been developed yet, but several existing mobile apps can store
 * Official app website: <https://samr1.github.io/FitTrackee>
 * Official admin documentation: <https://samr1.github.io/FitTrackee>
 * Upstream app code repository: <https://github.com/SamR1/FitTrackee>
+* YunoHost Store: <https://apps.yunohost.org/app/fittrackee>
 * Report a bug: <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>
 
 ## Developer info
