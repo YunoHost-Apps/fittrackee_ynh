@@ -4,7 +4,7 @@
 # COMMON VARIABLES
 #=================================================
 
-fittrackee_version="0.7.25"
+fittrackee_version="0.7.26"
 
 #=================================================
 # PERSONAL HELPERS

@@ -5,7 +5,7 @@ name = "FitTrackee"
 description.en = "Self-hosted outdoor activity tracker 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.25~ynh3"
+version = "0.7.26~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -17,7 +17,7 @@ admindoc = "https://samr1.github.io/FitTrackee"
 code = "https://github.com/SamR1/FitTrackee"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.4"
 architectures = "all"
 multi_instance = true
 
