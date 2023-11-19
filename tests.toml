@@ -21,4 +21,4 @@ test_format = 1.0
     test_upgrade_from.e49294c.name = "0.7.22"
     test_upgrade_from.a446e8c.name = "0.7.23"
     test_upgrade_from.316dea4.name = "0.7.24"
-    test_upgrade_from.ea68daf.name = "0.7.25~ynh1"
+    test_upgrade_from.d682f12.name = "0.7.25~ynh3"
