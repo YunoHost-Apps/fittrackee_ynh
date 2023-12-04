@@ -13,8 +13,8 @@ source /usr/share/yunohost/helpers
 # LOAD SETTINGS
 #=================================================
 
-admin=$(ynh_user_get_info --username=$admin --key=username)
-admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
+weather_provider=$(ynh_app_setting_get --app=$app --key=$weather_provider)
+weather_key=$(ynh_app_setting_get --app=$app --key=$weather_key)
 
 #=================================================
 # STANDARD UPGRADE STEPS

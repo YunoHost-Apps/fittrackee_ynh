@@ -16,9 +16,8 @@ source /usr/share/yunohost/helpers
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
-ynh_app_setting_set --app=$app --key=weather_provider --value=$weather_provider
-ynh_app_setting_set --app=$app --key=weather_key --value=$weather_key
-
+weather_provider=$(ynh_app_setting_get --app=$app --key=$weather_provider)
+weather_key=$(ynh_app_setting_get --app=$app --key=$weather_key)
 
 #=================================================
 # CHECK VERSION
