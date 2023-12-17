@@ -31,9 +31,6 @@ fi
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
-ynh_app_setting_set --app=$app --key=weather_api_provider --value=$weather_api_provider
-ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
-
 #=================================================
 # CHECK VERSION
 #=================================================
