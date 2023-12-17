@@ -26,7 +26,7 @@ services = ["__APP__", "__APP___workers"]
         help.fr = "Change le répertoire de données où sont stockés tous les fichiers .gpx téléversés et les photos de profil"
         bind = "UPLOAD_FOLDER:/var/www/__APP__/.env"
 
-        [main.config.weather_provider]
+        [main.config.weather_api_provider]
         ask.en = "Change weather provider"
         ask.fr = "Changer le fournisseur météo"
         type = "select"
@@ -36,7 +36,7 @@ services = ["__APP__", "__APP___workers"]
         help.fr = "Changer votre fournisseur météo en choisissant un de ceux qui vous sont proposés"
         bind = "WEATHER_API_PROVIDER:/var/www/__APP__/.env"
 
-        [main.config.WEATHER_API_KEY]
+        [main.config.weather_api_key]
         ask.en = "Change weather api key"
         ask.fr = "Changer la clé api pour la météo"
         type = "string"
