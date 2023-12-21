@@ -3,9 +3,9 @@ After the installation, you can login with the user and password you choose befo
 If you have to use the [command line interface (cli)](https://samr1.github.io/FitTrackee/cli.html), you can go like this:
 
 ```
- pushd $install_dir/
-    source $install_dir/venv/bin/activate
+ pushd __INSTALL_DIR__/
+    source __INSTALL_DIR__/venv/bin/activate
     ftcli [OPTIONS] COMMAND [ARGS]...
+ popd
 ```
 
-`$install_dir` has to be changed with the actual FitTrackee installed directory. Most of the time it will be `/var/www/fittrackee/`.

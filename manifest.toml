@@ -5,7 +5,7 @@ name = "FitTrackee"
 description.en = "Self-hosted outdoor activity tracker 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.7.26~ynh1"
+version = "0.7.27~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -47,7 +47,7 @@ ram.runtime = "50M"
     help.fr = "Choisissez un mot de passe pour l’utilisateur admin ici."
     type = "password"
 
-    [install.weather_provider]
+    [install.weather_api_provider]
     ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
     ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
     help.en = "Since Fittrackee 0.7.15, only Visual Crossing is supported"
@@ -57,7 +57,7 @@ ram.runtime = "50M"
     default = "visualcrossing"
     optional = true
 
-    [install.weather_key]
+    [install.weather_api_key]
     ask.en = "(Optional) Insert here the api key from the chosen weather provider"
     ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"

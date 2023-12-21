@@ -10,15 +10,26 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# ENSURE DOWNWARD COMPATIBILITY
+#=================================================
+ynh_script_progression --message="Ensuring downward compatibility..." --weight=1
+
+if [ -z "${weather_api_provider:-}" ]; then
+	weather_api_provider=$weather_provider
+	ynh_app_setting_set --app=$app --key=weather_api_provider --value=$weather_api_provider
+fi
+
+if [ -z "${weather_api_key:-}" ]; then
+	weather_api_key=$weather_key
+	ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
+fi
+
+#=================================================
 # LOAD SETTINGS
 #=================================================
 
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
-
-ynh_app_setting_set --app=$app --key=weather_provider --value=$weather_provider
-ynh_app_setting_set --app=$app --key=weather_key --value=$weather_key
-
 
 #=================================================
 # CHECK VERSION
