@@ -48,9 +48,6 @@ chmod 600 $install_dir/.env
 
 chown -R $app:www-data "$install_dir"
 
-set -a; source "$install_dir/.env"; set +a
-
-
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
