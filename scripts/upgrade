@@ -65,8 +65,6 @@ ynh_add_config --template="../conf/.env.production" --destination="$install_dir/
 chmod 600 $install_dir/.env
 chown $app: "$install_dir/.env"
 
-set -a; source "$install_dir/.env"; set +a
-
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
@@ -98,8 +96,13 @@ popd
 #=================================================
 ynh_script_progression --message="Upgrading database..." --weight=1
 
+set -a
+
+source $install_dir/.env
+
 ynh_exec_warn_less $install_dir/venv/bin/ftcli db upgrade
 
+set +a
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
