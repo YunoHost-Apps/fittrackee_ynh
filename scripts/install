@@ -69,7 +69,7 @@ pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
         ynh_exec_warn_less pip install --upgrade pip wheel toml pyyaml
-	ynh_exec_warn_less pip install fittrackee==$fittrackee_version
+	ynh_exec_warn_less pip install fittrackee=="$(ynh_app_upstream_version)"
 popd
 
 #=================================================
