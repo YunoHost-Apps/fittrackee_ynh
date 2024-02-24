@@ -14,6 +14,13 @@ admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 ynh_app_setting_set --app=$app --key=weather_api_provider --value=$weather_api_provider
 ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
 
+# Configure redis
+redis_db=$(ynh_redis_get_free_db)
+ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
+
+# key for the .env __KEY__
+key=$(ynh_string_random --length=45 | base64)
+ynh_app_setting_set --app=$app --key=key --value=$key
 
 #=================================================
 # LOGROTATE
@@ -32,19 +39,10 @@ chown -R $app:www-data /var/log/$app/
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
 
-# Configure redis
-redis_db=$(ynh_redis_get_free_db)
-ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
-
-
-# key for the .env __KEY__
-key=$(ynh_string_random --length=45 | base64)
-ynh_app_setting_set --app=$app --key=key --value=$key
-
 ynh_script_progression --message="Setting up source files..." --weight=64
 
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
-chmod 600 $install_dir/.env
+chmod 400 $install_dir/.env
 
 chown -R $app:www-data "$install_dir"
 
