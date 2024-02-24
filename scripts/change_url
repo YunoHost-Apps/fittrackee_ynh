@@ -26,7 +26,7 @@ if [ -z "${weather_api_key:-}" ]; then
 	ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
 fi
 
-if [ -z "${$redis_db:-}" ]; then
+if [ -z "${redis_db:-}" ]; then
     redis_db=$(ynh_redis_get_free_db)
     ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
 fi
