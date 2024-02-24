@@ -16,6 +16,21 @@ source /usr/share/yunohost/helpers
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
+if [ -z "${weather_api_provider:-}" ]; then
+	weather_api_provider=$weather_provider
+	ynh_app_setting_set --app=$app --key=weather_api_provider --value=$weather_api_provider
+fi
+
+if [ -z "${weather_api_key:-}" ]; then
+	weather_api_key=$weather_key
+	ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
+fi
+
+if [ -z "${$redis_db:-}" ]; then
+    redis_db=$(ynh_redis_get_free_db)
+    ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
+fi
+
 #=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
