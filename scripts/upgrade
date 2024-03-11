@@ -62,15 +62,13 @@ ynh_script_progression --message="Installing service script..." --weight=1
 
 redis_db=$(ynh_redis_get_free_db)
 ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
-chmod 600 $install_dir/.env
+chmod 400 $install_dir/.env
 chown $app: "$install_dir/.env"
 
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
 ynh_script_progression --message="Installing Python dependencies..." --weight=3
-
-ynh_secure_remove $install_dir/.venv
 
 if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "armel" ]
 then
