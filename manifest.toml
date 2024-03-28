@@ -44,14 +44,14 @@ ram.runtime = "50M"
 
     [install.password]
     help.en = "Choose a password for your admin user here."
-    help.fr = "Choisissez un mot de passe pour l’utilisateur admin ici."
+    help.fr = "belp"
     type = "password"
 
     [install.weather_api_provider]
     ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
-    ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
+    ask.fr = "belp"
     help.en = "Since Fittrackee 0.7.15, only Visual Crossing is supported"
-    help.fr = "Depuis Fittrackee 0.7.15, seul Visual Crossing est supporté"
+    help.fr = "belp"
     type = "select"
     choices = ["", "visualcrossing"]
     default = "visualcrossing"
@@ -59,7 +59,7 @@ ram.runtime = "50M"
 
     [install.weather_api_key]
     ask.en = "(Optional) Insert here the api key from the chosen weather provider"
-    ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
+    ask.fr = "belp"
     type = "string"
     default = false
     optional = true
