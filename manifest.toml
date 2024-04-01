@@ -3,6 +3,8 @@ packaging_format = 2
 id = "fittrackee"
 name = "FitTrackee"
 description.en = "Self-hosted outdoor activity tracker 🚴"
+description.gl = "Rexistra as túas actividades ao aire libre 🚴"
+description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
 version = "0.7.32~ynh1"
@@ -44,13 +46,19 @@ ram.runtime = "50M"
 
     [install.password]
     help.en = "Choose a password for your admin user here."
+    help.gl = "Elixe un contrasinal para a usuaria Admin en FitTrackee."
+    help.ca = "Triar una contrasenya per a l'usuari d'administració."
     help.fr = "Choisissez un mot de passe pour l’utilisateur admin ici."
     type = "password"
 
     [install.weather_api_provider]
     ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
+    ask.gl = "(Optativo) Elixe o provedor de meteoroloxía, entre Darksky e Visual Crossing"
+    ask.ca = "(Opcional) Escollir un proveïdor del temps entre Darksky i Visual Crossing"
     ask.fr = "(Optionnel) Choisissez votre fournisseur météo entre Darksky et Visual Crossing"
     help.en = "Since Fittrackee 0.7.15, only Visual Crossing is supported"
+    help.gl = "Desde Fittrackee 0.7.15, só temos soporte para Visual Crossing"
+    help.ca = "Des de Fittrackee 0.7.15, només es suporta l'ús de Visual Crossing"
     help.fr = "Depuis Fittrackee 0.7.15, seul Visual Crossing est supporté"
     type = "select"
     choices = ["", "visualcrossing"]
@@ -59,6 +67,8 @@ ram.runtime = "50M"
 
     [install.weather_api_key]
     ask.en = "(Optional) Insert here the api key from the chosen weather provider"
+    ask.gl = "(Optativo) Escribe aquí a chave da API do provedor de meteoroloxía elexido"
+    ask.ca = "(Opcional) Inserir la clau de l'API del proveïdor del temps escollit"
     ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"
     default = false
