@@ -12,7 +12,7 @@ version = "0.8.0~ynh1"
 maintainers = ["Thovi98"]
 
 [upstream]
-license = "AGPL-3.0"
+license = "AGPL-3.0-only"
 website = "https://samr1.github.io/FitTrackee"
 demo = ""
 admindoc = "https://samr1.github.io/FitTrackee"
