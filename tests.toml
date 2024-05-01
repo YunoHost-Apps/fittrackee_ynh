@@ -16,4 +16,5 @@ test_format = 1.0
     # Commits to test upgrade from
     # -------------------------------
     test_upgrade_from.499f21b.name = "0.7.32"
+    test_upgrade_from.5b6ccd1.name = "0.8.0"
     
