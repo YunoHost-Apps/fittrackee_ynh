@@ -3,7 +3,7 @@
 请勿手动编辑。
 -->
 
-# YunoHost 的 FitTrackee
+# YunoHost 上的 FitTrackee
 
 [![集成程度](https://dash.yunohost.org/integration/fittrackee.svg)](https://dash.yunohost.org/appci/app/fittrackee) ![工作状态](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
 
@@ -20,7 +20,7 @@ FitTrackee allows you to track your outdoor activities (workouts) from gpx files
 No mobile app has been developed yet, but several existing mobile apps can store workouts data locally and export them into a gpx file.
 
 
-**分发版本：** 0.8.1~ynh1
+**分发版本：** 0.8.3~ynh1
 
 ## 截图
 
