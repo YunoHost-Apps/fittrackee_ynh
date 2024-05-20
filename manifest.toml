@@ -19,7 +19,7 @@ admindoc = "https://samr1.github.io/FitTrackee"
 code = "https://github.com/SamR1/FitTrackee"
 
 [integration]
-yunohost = ">= 11.2.4"
+yunohost = ">= 11.2.12"
 architectures = "all"
 multi_instance = true
 
@@ -35,7 +35,7 @@ ram.runtime = "50M"
     [install.domain]
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
-      
+
     [install.init_main_permission]
     type = "group"
     default = "visitors"
@@ -85,7 +85,7 @@ ram.runtime = "50M"
     [resources.permissions]
     main.url = "/"
     main.auth_header = false
-    
+
     [resources.ports]
     main.default = 5000
 
