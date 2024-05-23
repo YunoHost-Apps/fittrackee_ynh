@@ -7,7 +7,7 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.8.3~ynh1"
+version = "0.8.4~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -50,6 +50,13 @@ ram.runtime = "50M"
     help.ca = "Triar una contrasenya per a l'usuari d'administració."
     help.fr = "Choisissez un mot de passe pour l’utilisateur admin ici."
     type = "password"
+
+    [install.language]
+    ask.en = "Choose the application language"
+    ask.fr = "Choisissez la langue de l'application"
+    type = "select"
+    choices = ["cs", "de", "en", "es", "eu", "fr", "gl", "it", "nb", "nl", "pl", "pt"]
+    default = "en"
 
     [install.weather_api_provider]
     ask.en = "(Optional) Choose your weather provider between Darksky and Visual Crossing"
