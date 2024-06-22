@@ -49,9 +49,6 @@ ynh_remove_nginx_config
 
 ynh_remove_logrotate
 
-# Remove the log files
-ynh_secure_remove --file="/var/log/$app"
-
 # Remove the redis database
 ynh_redis_remove_db "$redis_db"
 
