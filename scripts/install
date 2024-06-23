@@ -1,37 +1,29 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
-ynh_app_setting_set --app=$app --key=weather_api_provider --value=$weather_api_provider
-ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
+ynh_app_setting_set --key=weather_api_provider --value=$weather_api_provider
+ynh_app_setting_set --key=weather_api_key --value=$weather_api_key
 
 # Configure redis
 redis_db=$(ynh_redis_get_free_db)
-ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
+ynh_app_setting_set --key=redis_db --value="$redis_db"
 
 # key for the .env __KEY__
 key=$(ynh_string_random --length=45 | base64)
-ynh_app_setting_set --app=$app --key=key --value=$key
+ynh_app_setting_set --key=key --value=$key
 
 #=================================================
 # LOGROTATE
 #=================================================
-ynh_script_progression --message="Configuring logrotate to manage application logfiles" --weight=1
+ynh_script_progression "Configuring logrotate to manage application logfiles"
 
 # Use logrotate to manage application logfile(s)
-ynh_use_logrotate --specific_user=$app
-touch /var/log/$app/$app.log
-touch /var/log/$app/${app}_workers.log
-chown -R $app:www-data /var/log/$app/
+ynh_config_add_logrotate
+
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -39,9 +31,9 @@ chown -R $app:www-data /var/log/$app/
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
 
-ynh_script_progression --message="Setting up source files..." --weight=64
+ynh_script_progression "Setting up source files..."
 
-ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
+ynh_config_add --template=".env.production" --destination="$install_dir/.env"
 chmod 400 $install_dir/.env
 
 chown -R $app:www-data "$install_dir"
@@ -49,85 +41,84 @@ chown -R $app:www-data "$install_dir"
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing Python dependencies..." --weight=3
+ynh_script_progression "Installing Python dependencies..."
 
 if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "armel" ]
 then
-# Install rustup is not already installed 
+# Install rustup if not already installed
 # We need this to be able to install cryptgraphy on ARM hardware
 export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sbin"
     if [ -e $install_dir/.rustup ]; then
-    sudo -u "$app" env PATH=$PATH rustup update
+    ynh_exec_as_app PATH=$PATH rustup update
     else
-    sudo -u "$app" bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
+    ynh_exec_as_app bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
     fi
 fi
 
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
-        ynh_exec_warn_less pip install --upgrade pip wheel toml pyyaml
-	ynh_exec_warn_less pip install fittrackee=="$(ynh_app_upstream_version)"
+    ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
+	ynh_hide_warnings pip install fittrackee=="$(ynh_app_upstream_version)"
 popd
 
 #=================================================
 # INITIALIZE DATABASE
 #=================================================
- ynh_script_progression --message="Initializing database..." --weight=1
+ ynh_script_progression "Initializing database..."
 
-set -a 
+set -a
+
 source $install_dir/.env
 
-ynh_exec_warn_less $install_dir/venv/bin/ftcli db upgrade
+ynh_hide_warnings $install_dir/venv/bin/ftcli db upgrade
 
-ynh_exec_warn_less $install_dir/venv/bin/ftcli users create $admin --email $admin_mail --password $password --lang $language
+ynh_hide_warnings $install_dir/venv/bin/ftcli users create $admin --email $admin_mail --password $password --lang $language
 
-ynh_exec_warn_less $install_dir/venv/bin/ftcli users update $admin --set-admin true
+ynh_hide_warnings $install_dir/venv/bin/ftcli users update $admin --set-admin true
 
 set +a
 #=================================================
 # System Configuration
 #=================================================
-ynh_script_progression --message="Adding system configurations related to $app ..." --weight=1
+ynh_script_progression "Adding system configurations related to $app ..."
 
 #=================================================
 # NGINX CONFIGURATION
 #=================================================
-ynh_script_progression --message="Configuring NGINX web server..." --weight=1
+ynh_script_progression "Configuring NGINX web server..."
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config
+ynh_config_add_nginx
 
 #=================================================
 # SETUP SYSTEMD
 #=================================================
-ynh_script_progression --message="Configuring a systemd service..." --weight=1
+ynh_script_progression "Configuring $app's systemd service..."
 
 # Create a dedicated systemd config
-ynh_add_systemd_config --service="${app}" --template="fittrackee.service"
-ynh_add_systemd_config --service="${app}_workers" --template="fittrackee_workers.service"
+ynh_config_add_systemd --service="${app}" --template="fittrackee.service"
+ynh_config_add_systemd --service="${app}_workers" --template="fittrackee_workers.service"
 
 #=================================================
 # INTEGRATE SERVICE IN YUNOHOST
 #=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
+ynh_script_progression "Integrating service in YunoHost..."
 
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
 
 #=================================================
-# GENERIC FINALIZATION
-#=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting the systemd services..." --weight=15
+ynh_script_progression "Starting the systemd services..."
 
 # Start a systemd service
-ynh_systemd_action --service_name="${app}" --action="start"
-ynh_systemd_action --service_name="${app}_workers" --action="start"
+ynh_systemctl --service="${app}" --action="start"
+ynh_systemctl --service="${app}_workers" --action="start"
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Installation of $app completed" --last
+ynh_script_progression "Installation of $app completed"
