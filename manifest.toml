@@ -33,7 +33,6 @@ ram.runtime = "50M"
 
 [install]
     [install.domain]
-    # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
 
     [install.init_main_permission]
@@ -41,8 +40,9 @@ ram.runtime = "50M"
     default = "visitors"
 
     [install.admin]
-    # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "user"
+    help.en = "You will have to login with the email of this user and the password you’ll set below."
+    help.fr = "Vous devrez vous connecter avec l’adresse courriel de cet utilisateur et le mot de passe configuré ci-dessous."
 
     [install.password]
     help.en = "Choose a password for your admin user here."
