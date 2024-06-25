@@ -30,8 +30,8 @@ fi
 ynh_script_progression "Stopping and removing the systemd service..."
 
 # Remove the dedicated systemd config
-ynh_config_remove_systemd"${app}"
-ynh_config_remove_systemd"${app}_workers"
+ynh_config_remove_systemd "${app}"
+ynh_config_remove_systemd "${app}_workers"
 
 #=================================================
 # REMOVE VARIOUS FILES
