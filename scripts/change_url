@@ -1,11 +1,5 @@
 #!/bin/bash
 
-#=================================================
-# GENERIC START
-#=================================================
-# IMPORT GENERIC HELPERS
-#=================================================
-
 source _common.sh
 source /usr/share/yunohost/helpers
 
@@ -16,57 +10,48 @@ source /usr/share/yunohost/helpers
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
-if [ -z "${weather_api_provider:-}" ]; then
-	weather_api_provider=$weather_provider
-	ynh_app_setting_set --app=$app --key=weather_api_provider --value=$weather_api_provider
-fi
+ynh_app_setting_set_default --key=weather_api_provider --value=$weather_provider
 
-if [ -z "${weather_api_key:-}" ]; then
-	weather_api_key=$weather_key
-	ynh_app_setting_set --app=$app --key=weather_api_key --value=$weather_api_key
-fi
+ynh_app_setting_set_default --key=weather_api_key --value=$weather_key
 
-if [ -z "${redis_db:-}" ]; then
-    redis_db=$(ynh_redis_get_free_db)
-    ynh_app_setting_set --app="$app" --key=redis_db --value="$redis_db"
-fi
+ynh_app_setting_set_default --key=redis_db --value=$(ynh_redis_get_free_db)
 
-#=================================================
-# STANDARD UPGRADE STEPS
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping a systemd service..." --weight=1
+ynh_script_progression "Stopping $app's systemd service..."
 
-ynh_systemd_action --action="stop" --service_name="${app}" 
-ynh_systemd_action --action="stop" --service_name="${app}_workers"
+ynh_systemctl --action="stop" --service="${app}"
+
+ynh_systemctl --action="stop" --service="${app}_workers"
 
 #=================================================
 # MODIFY URL IN NGINX CONF
 #=================================================
-ynh_script_progression --message="Updating NGINX web server configuration..." --weight=1
+ynh_script_progression "Updating NGINX web server configuration..."
 
-ynh_change_url_nginx_config
+ynh_config_change_url_nginx
 
 #=================================================
 # MODIFY THE CONFIG FILE
 #=================================================
-ynh_script_progression --message="Modifying a config file..." --weight=1
+ynh_script_progression "Updating configuration..."
 
 domain=$new_domain
-ynh_add_config --template="../conf/.env.production" --destination="$install_dir/.env"
+ynh_config_add --template=".env.production" --destination="$install_dir/.env"
 
 #=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting the systemd services..." --weight=15
+ynh_script_progression "Starting the systemd services..."
 
 # Start a systemd service
-ynh_systemd_action --service_name="${app}" --action="start"  
-ynh_systemd_action --service_name="${app}_workers" --action="start" 
+ynh_systemctl --service="${app}" --action="start"
+
+ynh_systemctl --service="${app}_workers" --action="start"
 
 #=================================================
 # END OF SCRIPT
 #=================================================
 
-ynh_script_progression --message="Upgrade of $app completed" --last
+ynh_script_progression "Upgrade of $app completed"
