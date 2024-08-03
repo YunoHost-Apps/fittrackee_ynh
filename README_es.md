@@ -5,7 +5,7 @@ No se debe editar a mano.
 
 # FitTrackee para Yunohost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/fittrackee.svg)](https://dash.yunohost.org/appci/app/fittrackee) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/fittrackee.svg)](https://ci-apps.yunohost.org/ci/apps/fittrackee/) ![Estado funcional](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![Estado En Mantención](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
 
 [![Instalar FitTrackee con Yunhost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=fittrackee)
 
@@ -20,7 +20,7 @@ FitTrackee allows you to track your outdoor activities (workouts) from gpx files
 No mobile app has been developed yet, but several existing mobile apps can store workouts data locally and export them into a gpx file.
 
 
-**Versión actual:** 0.8.4~ynh1
+**Versión actual:** 0.8.5~ynh1
 
 ## Capturas
 

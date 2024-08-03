@@ -7,7 +7,7 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.8.4~ynh1"
+version = "0.8.5~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -42,6 +42,8 @@ ram.runtime = "50M"
 
     [install.admin]
     type = "user"
+    help.en = "You will have to login with the email of this user and the password you’ll set below."
+    help.fr = "Vous devrez vous connecter avec l’adresse courriel de cet utilisateur et le mot de passe configuré ci-dessous."
 
     [install.password]
     help.en = "Choose a password for your admin user here."
@@ -96,7 +98,7 @@ ram.runtime = "50M"
     main.default = 5000
 
     [resources.apt]
-    packages = "postgresql, postgresql-contrib, python3, python3-venv, libopenjp2-7"
+    packages = "postgresql, postgresql-contrib, python3, python3-venv, libopenjp2-7, redis-server"
 
     [resources.database]
     type = "postgresql"
