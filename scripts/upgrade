@@ -29,21 +29,12 @@ ynh_systemctl --action="stop" --service="${app}"
 ynh_systemctl --action="stop" --service="${app}_workers"
 
 #=================================================
-# INSTALL DEPENDENCIES
-#=================================================
-ynh_script_progression "Installing dependencies..."
-
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app: "$install_dir"
-#=================================================
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
 ynh_script_progression "Installing service script..."
 
 redis_db=$(ynh_redis_get_free_db)
 ynh_config_add --template=".env.production" --destination="$install_dir/.env"
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 400 $install_dir/.env
-#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown $app: "$install_dir/.env"
 
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
