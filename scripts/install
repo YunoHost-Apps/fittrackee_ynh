@@ -24,7 +24,6 @@ ynh_script_progression "Configuring logrotate to manage application logfiles"
 # Use logrotate to manage application logfile(s)
 ynh_config_add_logrotate
 
-
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
@@ -34,10 +33,9 @@ ynh_config_add_logrotate
 ynh_script_progression "Setting up source files..."
 
 ynh_config_add --template=".env.production" --destination="$install_dir/.env"
-chmod 400 $install_dir/.env
+#REMOVEME? Assuming the file is setup using ynh_config_add, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod 400 $install_dir/.env
 
-chown -R $app:www-data "$install_dir"
-
+#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R $app:www-data "$install_dir"
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
