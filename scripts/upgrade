@@ -81,6 +81,14 @@ ynh_script_progression "Upgrading NGINX web server configuration..."
 ynh_config_add_nginx
 
 #=================================================
+# LOGROTATE
+#=================================================
+#temporary fix for installations with wrong permissions for logs
+touch /var/log/$app/$app.log
+touch /var/log/$app/${app}_workers.log
+chown -R $app:www-data /var/log/$app/
+
+#=================================================
 # SETUP SYSTEMD
 #=================================================
 ynh_script_progression "Upgrading systemd configuration..."

@@ -23,6 +23,9 @@ ynh_script_progression "Configuring logrotate to manage application logfiles"
 
 # Use logrotate to manage application logfile(s)
 ynh_config_add_logrotate
+touch /var/log/$app/$app.log
+touch /var/log/$app/${app}_workers.log
+chown -R $app:www-data /var/log/$app/
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
