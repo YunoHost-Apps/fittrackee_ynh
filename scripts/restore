@@ -17,6 +17,7 @@ ynh_script_progression "Configuring logrotate to manage application logfiles"
 ynh_config_add_logrotate
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}_workers.log
+chown -R $app:www-data /var/log/$app/
 
 #=================================================
 # RESTORE THE NGINX CONFIGURATION
