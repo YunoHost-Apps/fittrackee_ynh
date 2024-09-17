@@ -33,7 +33,6 @@ ynh_systemctl --action="stop" --service="${app}_workers"
 #=================================================
 ynh_script_progression "Installing service script..."
 
-redis_db=$(ynh_redis_get_free_db)
 ynh_config_add --template=".env.production" --destination="$install_dir/.env"
 
 #=================================================
