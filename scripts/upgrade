@@ -29,6 +29,13 @@ ynh_systemctl --action="stop" --service="${app}"
 
 ynh_systemctl --action="stop" --service="${app}_workers"
 
+#temporary fix for redis_db which had a bug (my bad)
+if ynh_compare_current_package_version --comparison lt --version 0.8.8~ynh2
+then
+    #It will be reinstalled later in this script
+    ynh_redis_remove_db "$redis_db"
+fi
+
 #=================================================
 # CONFIGURE THE INSTALL SCRIPT
 #=================================================
