@@ -116,6 +116,13 @@ ynh_systemctl --service="${app}" --action="start"
 ynh_systemctl --service="${app}_workers" --action="start"
 
 #=================================================
+# UPGRADE FAIL2BAN
+#=================================================
+ynh_script_progression "Reconfiguring Fail2Ban..."
+
+ynh_config_add_fail2ban --logpath="/var/log/nginx/$domain-access.log" --failregex="<HOST>.* \"POST /api/v1/users/login HTTP/2.0\" 400 68.*$"
+
+#=================================================
 # END OF SCRIPT
 #=================================================
 
