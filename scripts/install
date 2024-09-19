@@ -116,6 +116,13 @@ ynh_systemctl --service="${app}" --action="start"
 ynh_systemctl --service="${app}_workers" --action="start"
 
 #=================================================
+# SETUP FAIL2BAN
+#=================================================
+ynh_script_progression "Configuring Fail2Ban..."
+
+ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-access.log" --failregex="<HOST>.* \"POST /api/auth/login HTTP/\d.\d\" 40"
+
+#=================================================
 # END OF SCRIPT
 #=================================================
 
