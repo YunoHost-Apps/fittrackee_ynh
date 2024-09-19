@@ -5,16 +5,9 @@ source /usr/share/yunohost/helpers
 
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
+
 ynh_app_setting_set --key=weather_api_provider --value=$weather_api_provider
 ynh_app_setting_set --key=weather_api_key --value=$weather_api_key
-
-# Configure redis
-redis_db=$(ynh_redis_get_free_db)
-ynh_app_setting_set --key=redis_db --value="$redis_db"
-
-# key for the .env __KEY__
-key=$(ynh_string_random --length=45 | base64)
-ynh_app_setting_set --key=key --value=$key
 
 #=================================================
 # LOGROTATE
@@ -34,6 +27,12 @@ chown -R $app:www-data /var/log/$app/
 #=================================================
 
 ynh_script_progression "Setting up source files..."
+
+key=$(ynh_string_random --length=45 | base64)
+redis_db=$(ynh_redis_get_free_db)
+
+ynh_app_setting_set --key=key --value=$key
+ynh_app_setting_set --key=redis_db --value=$redis_db
 
 ynh_config_add --template=".env.production" --destination="$install_dir/.env"
 
