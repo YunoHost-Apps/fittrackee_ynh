@@ -4,6 +4,14 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# LOAD SETTINGS
+#=================================================
+
+admin=$(ynh_user_get_info --username=$admin --key=username)
+admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
+ynh_app_setting_set_default --key=redis_db --value=$(ynh_redis_get_free_db)
+
+#=================================================
 # ENSURE DOWNWARD COMPATIBILITY
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
@@ -20,21 +28,6 @@ ynh_script_progression "Stopping $app's systemd service..."
 ynh_systemctl --action="stop" --service="${app}"
 
 ynh_systemctl --action="stop" --service="${app}_workers"
-
-#temporary fix for redis_db which had a bug (my bad)
-if ynh_app_upgrading_from_version_before 0.8.8~ynh2; 
-then
-    #It will be reinstalled later in this script
-    ynh_redis_remove_db "$redis_db"
-fi
-
-#=================================================
-# LOAD SETTINGS
-#=================================================
-
-admin=$(ynh_user_get_info --username=$admin --key=username)
-admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
-ynh_app_setting_set_default --key=redis_db --value=$(ynh_redis_get_free_db)
 
 #=================================================
 # CONFIGURE THE INSTALL SCRIPT
@@ -63,7 +56,7 @@ fi
 pushd $install_dir
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
-    ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
+        ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
 	ynh_hide_warnings pip install fittrackee=="$(ynh_app_upstream_version)"
 popd
 
