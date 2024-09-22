@@ -54,10 +54,15 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
 fi
 
 pushd $install_dir
+	
+    #Remove old venv to prevent issue for when the old venv was on another arch for example
+    ynh_safe_rm "$install_dir/venv"
+
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
-        ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
+    ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
 	ynh_hide_warnings pip install fittrackee=="$(ynh_app_upstream_version)"
+    
 popd
 
 #=================================================
