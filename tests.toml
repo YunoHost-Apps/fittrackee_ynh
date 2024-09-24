@@ -24,3 +24,4 @@ test_format = 1.0
     test_upgrade_from.ec414ce.name = "0.8.6"
     test_upgrade_from.064f8a4.name = "0.8.7"
     test_upgrade_from.115ab41.name = "0.8.8"
+    test_upgrade_from.512bd58.name = "0.8.9~ynh1"
