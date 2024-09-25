@@ -10,11 +10,6 @@ source /usr/share/yunohost/helpers
 admin=$(ynh_user_get_info --username=$admin --key=username)
 admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 
-ynh_app_setting_set_default --key=weather_api_provider --value=$weather_api_provider
-ynh_app_setting_set_default --key=weather_api_key --value=$weather_api_key
-
-ynh_app_setting_set_default --key=redis_db --value=$(ynh_redis_get_free_db)
-
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
@@ -44,7 +39,6 @@ ynh_config_add --template=".env.production" --destination="$install_dir/.env"
 #=================================================
 ynh_script_progression "Starting the systemd services..."
 
-# Start a systemd service
 ynh_systemctl --service="${app}" --action="start"
 
 ynh_systemctl --service="${app}_workers" --action="start"
