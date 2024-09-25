@@ -3,8 +3,6 @@
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
-db_name=$(ynh_app_setting_get --key=db_name)
-
 #=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================

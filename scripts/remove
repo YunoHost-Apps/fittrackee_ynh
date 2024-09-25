@@ -8,8 +8,6 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_script_progression "Loading installation settings..."
 
-redis_db=$(ynh_app_setting_get --key=redis_db)
-
 #=================================================
 # REMOVE SYSTEM CONFIGURATIONS
 #=================================================
