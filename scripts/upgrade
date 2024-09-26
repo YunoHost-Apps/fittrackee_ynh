@@ -26,7 +26,6 @@ ynh_app_setting_set_default --key=weather_key --value=$weather_api_key
 ynh_script_progression "Stopping $app's systemd service..."
 
 ynh_systemctl --action="stop" --service="${app}"
-
 ynh_systemctl --action="stop" --service="${app}_workers"
 
 #=================================================
@@ -54,15 +53,12 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
 fi
 
 pushd $install_dir
-	
     #Remove old venv to prevent issue for when the old venv was on another arch for example
     ynh_safe_rm "$install_dir/venv"
-
 	python3 -m venv $install_dir/venv
 	source $install_dir/venv/bin/activate
     ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
 	ynh_hide_warnings pip install fittrackee=="$(ynh_app_upstream_version)"
-    
 popd
 
 #=================================================
@@ -77,55 +73,34 @@ source $install_dir/.env
 ynh_hide_warnings $install_dir/venv/bin/ftcli db upgrade
 
 set +a
-#=================================================
-# NGINX CONFIGURATION
-#=================================================
-ynh_script_progression "Upgrading NGINX web server configuration..."
 
-# Create a dedicated NGINX config
+#=================================================
+# REAPPLY SYSTEM CONFIGURATIONS
+#=================================================
+ynh_script_progression "Upgrading system configurations related to $app..."
+
 ynh_config_add_nginx
 
-#=================================================
-# LOGROTATE
-#=================================================
+ynh_config_add_systemd --service="${app}"   --template="fittrackee.service"
+ynh_config_add_systemd --service="${app}_workers" --template="fittrackee_workers.service"
+
+yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
+yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
+
+ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-access.log" --failregex="<HOST>.* \"POST /api/auth/login HTTP/\d.\d\" 40"
+
 #temporary fix for installations with wrong permissions for logs
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}_workers.log
 chown -R $app:www-data /var/log/$app/
 
 #=================================================
-# SETUP SYSTEMD
-#=================================================
-ynh_script_progression "Upgrading systemd configuration..."
-
-# Create a dedicated systemd config
-ynh_config_add_systemd --service="${app}"   --template="fittrackee.service"
-ynh_config_add_systemd --service="${app}_workers" --template="fittrackee_workers.service"
-
-#=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression "Integrating service in YunoHost..."
-
-yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
-yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="var/log/$app/${app}_workers.log"
-
-#=================================================
 # START SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Starting the systemd services..."
 
-# Start a systemd service
 ynh_systemctl --service="${app}" --action="start"
-
 ynh_systemctl --service="${app}_workers" --action="start"
-
-#=================================================
-# UPGRADE FAIL2BAN
-#=================================================
-ynh_script_progression "Reconfiguring Fail2Ban..."
-
-ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-access.log" --failregex="<HOST>.* \"POST /api/auth/login HTTP/\d.\d\" 40"
 
 #=================================================
 # END OF SCRIPT
