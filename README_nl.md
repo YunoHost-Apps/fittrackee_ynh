@@ -20,7 +20,7 @@ FitTrackee allows you to track your outdoor activities (workouts) from gpx files
 No mobile app has been developed yet, but several existing mobile apps can store workouts data locally and export them into a gpx file.
 
 
-**Geleverde versie:** 0.8.9~ynh2
+**Geleverde versie:** 0.8.10~ynh1
 
 ## Schermafdrukken
 
