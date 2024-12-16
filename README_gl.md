@@ -5,7 +5,9 @@ NON debe editarse manualmente.
 
 # FitTrackee para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/fittrackee.svg)](https://ci-apps.yunohost.org/ci/apps/fittrackee/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
+[![Nivel de integración](https://apps.yunohost.org/badge/integration/fittrackee)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
+![Estado de funcionamento](https://apps.yunohost.org/badge/state/fittrackee)
+![Estado de mantemento](https://apps.yunohost.org/badge/maintained/fittrackee)
 
 [![Instalar FitTrackee con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=fittrackee)
 

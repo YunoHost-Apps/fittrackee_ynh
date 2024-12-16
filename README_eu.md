@@ -5,7 +5,9 @@ EZ editatu eskuz.
 
 # FitTrackee YunoHost-erako
 
-[![Integrazio maila](https://dash.yunohost.org/integration/fittrackee.svg)](https://ci-apps.yunohost.org/ci/apps/fittrackee/) ![Funtzionamendu egoera](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![Mantentze egoera](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
+[![Integrazio maila](https://apps.yunohost.org/badge/integration/fittrackee)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
+![Funtzionamendu egoera](https://apps.yunohost.org/badge/state/fittrackee)
+![Mantentze egoera](https://apps.yunohost.org/badge/maintained/fittrackee)
 
 [![Instalatu FitTrackee YunoHost-ekin](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=fittrackee)
 

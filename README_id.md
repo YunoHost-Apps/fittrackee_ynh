@@ -5,7 +5,9 @@ Ini TIDAK boleh diedit dengan tangan.
 
 # FitTrackee untuk YunoHost
 
-[![Tingkat integrasi](https://dash.yunohost.org/integration/fittrackee.svg)](https://ci-apps.yunohost.org/ci/apps/fittrackee/) ![Status kerja](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![Status pemeliharaan](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
+[![Tingkat integrasi](https://apps.yunohost.org/badge/integration/fittrackee)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
+![Status kerja](https://apps.yunohost.org/badge/state/fittrackee)
+![Status pemeliharaan](https://apps.yunohost.org/badge/maintained/fittrackee)
 
 [![Pasang FitTrackee dengan YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=fittrackee)
 

@@ -5,7 +5,9 @@
 
 # FitTrackee для YunoHost
 
-[![Уровень интеграции](https://dash.yunohost.org/integration/fittrackee.svg)](https://ci-apps.yunohost.org/ci/apps/fittrackee/) ![Состояние работы](https://ci-apps.yunohost.org/ci/badges/fittrackee.status.svg) ![Состояние сопровождения](https://ci-apps.yunohost.org/ci/badges/fittrackee.maintain.svg)
+[![Уровень интеграции](https://apps.yunohost.org/badge/integration/fittrackee)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
+![Состояние работы](https://apps.yunohost.org/badge/state/fittrackee)
+![Состояние сопровождения](https://apps.yunohost.org/badge/maintained/fittrackee)
 
 [![Установите FitTrackee с YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=fittrackee)
 
