@@ -71,7 +71,7 @@ ynh_hide_warnings $install_dir/venv/bin/ftcli db upgrade
 
 ynh_hide_warnings $install_dir/venv/bin/ftcli users create $admin --email $admin_mail --password $password --lang $language
 
-ynh_hide_warnings $install_dir/venv/bin/ftcli users update $admin --set-admin true
+ynh_hide_warnings $install_dir/venv/bin/ftcli users update $admin --set-role owner
 
 set +a
 
