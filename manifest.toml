@@ -7,7 +7,7 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.8.12~ynh1"
+version = "0.9.0b3~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -19,7 +19,7 @@ admindoc = "https://samr1.github.io/FitTrackee"
 code = "https://github.com/SamR1/FitTrackee"
 
 [integration]
-yunohost = ">= 11.2.30"
+yunohost = ">= 12.0"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
