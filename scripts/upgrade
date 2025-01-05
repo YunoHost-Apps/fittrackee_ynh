@@ -78,7 +78,6 @@ then
    ynh_hide_warnings $install_dir/venv/bin/ftcli users update $admin --set-role owner
 fi
 
-
 set +a
 
 #=================================================
