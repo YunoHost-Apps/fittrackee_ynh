@@ -19,3 +19,4 @@ test_format = 1.0
     test_upgrade_from.ab2325a.name = "0.8.12"
     test_upgrade_from.9171a7e.name = "0.8.13"
     test_upgrade_from.d5f6343.name = "0.9.0"
+    test_upgrade_from.fc3eb62.name = "0.9.2"
