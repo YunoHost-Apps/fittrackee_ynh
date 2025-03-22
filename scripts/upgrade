@@ -65,12 +65,6 @@ fi
     ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install fittrackee=="$(ynh_app_upstream_version)"
 
     ynh_safe_rm "$install_dir/.cache/pip"
-fi
-    ynh_exec_as_app python3 -m venv "$install_dir/venv"
-    ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install --upgrade wheel toml pyyaml
-    ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install fittrackee=="$(ynh_app_upstream_version)"
-
-    ynh_safe_rm "$install_dir/.cache/pip"
 popd
 
 #Logrotate has to be added now, because the app won’t start if there are no logs files
