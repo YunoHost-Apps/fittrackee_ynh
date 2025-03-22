@@ -59,8 +59,6 @@ popd
 
 #Logrotate has to be added now, because the app won’t start if there are no logs files
 ynh_config_add_logrotate
-touch /var/log/$app/$app.log
-touch /var/log/$app/${app}_workers.log
 chown -R $app:www-data /var/log/$app/
 
 #=================================================
