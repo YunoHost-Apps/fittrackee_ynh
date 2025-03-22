@@ -56,14 +56,11 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
 fi
 
 pushd "$install_dir"
-if ynh_app_upgrading_from_version_before 0.9.3~ynh1
-then
-chown -R $app:www-data "$install_dir"
-fi
-    ynh_exec_as_app python3 -m venv "$install_dir/venv"
-    ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install --upgrade wheel toml pyyaml
-    ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install fittrackee=="$(ynh_app_upstream_version)"
-
+	python3 -m venv "$install_dir/venv"
+	source "$install_dir/venv/bin/activate"
+    ynh_hide_warnings pip install --upgrade pip wheel toml pyyaml
+	ynh_hide_warnings pip install fittrackee=="$(ynh_app_upstream_version)"
+    deactivate
     ynh_safe_rm "$install_dir/.cache/pip"
 popd
 
