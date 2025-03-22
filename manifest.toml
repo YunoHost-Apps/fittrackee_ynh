@@ -1,3 +1,5 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
 packaging_format = 2
 
 id = "fittrackee"
@@ -13,13 +15,13 @@ maintainers = ["Thovi98"]
 
 [upstream]
 license = "AGPL-3.0-only"
-website = "https://samr1.github.io/FitTrackee"
+website = "https://docs.fittrackee.org/"
 demo = ""
-admindoc = "https://samr1.github.io/FitTrackee"
+admindoc = "https://docs.fittrackee.org/"
 code = "https://github.com/SamR1/FitTrackee"
 
 [integration]
-yunohost = ">= 12.0"
+yunohost = ">= 12.0.9"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true

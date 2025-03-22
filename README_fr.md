@@ -29,8 +29,8 @@ Aucune application mobile n'a encore été développée, mais plusieurs applicat
 
 ## Documentations et ressources
 
-- Site officiel de l’app : <https://samr1.github.io/FitTrackee>
-- Documentation officielle de l’admin : <https://samr1.github.io/FitTrackee>
+- Site officiel de l’app : <https://docs.fittrackee.org/>
+- Documentation officielle de l’admin : <https://docs.fittrackee.org/>
 - Dépôt de code officiel de l’app : <https://github.com/SamR1/FitTrackee>
 - YunoHost Store : <https://apps.yunohost.org/app/fittrackee>
 - Signaler un bug : <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>

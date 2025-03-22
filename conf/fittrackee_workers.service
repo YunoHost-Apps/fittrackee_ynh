@@ -1,4 +1,3 @@
-
 [Unit]
 Description=__APP__ task queue service
 After=network.target
@@ -11,22 +10,16 @@ Restart=always
 RestartSec=1
 User=__APP__
 Group=__APP__
-StandardOutput=append:/var/log/__APP__/__APP___workers.log
-StandardError=inherit
-SyslogIdentifier=__APP___workers
 EnvironmentFile=__INSTALL_DIR__/.env
-Environment="FLASK_APP=fittrackee"
-Environment="APP_SECRET_KEY="
-Environment="APP_LOG="
-Environment="UPLOAD_FOLDER="
-Environment="DATABASE_URL="
-Environment="UI_URL="
-Environment="EMAIL_URL="
-Environment="SENDER_EMAIL="
-Environment="REDIS_URL="
 WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/venv/bin/flask worker --processes 2
+StandardOutput=append:/var/log/__APP__/__APP__.log
+StandardError=inherit
 
+### Depending on specificities of your service/app, you may need to tweak these
+### .. but this should be a good baseline
+# Sandboxing options to harden security
+# Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
 NoNewPrivileges=yes
 PrivateTmp=yes
 PrivateDevices=yes
