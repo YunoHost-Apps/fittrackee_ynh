@@ -1,20 +1,27 @@
 #!/bin/bash
 
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source _common.sh
 source /usr/share/yunohost/helpers
-
-#=================================================
-# LOAD SETTINGS
-#=================================================
-ynh_script_progression "Loading installation settings..."
 
 #=================================================
 # REMOVE SYSTEM CONFIGURATIONS
 #=================================================
 ynh_script_progression "Removing system configurations related to $app..."
 
+### This should be a symetric version of what happens in the install script
+
+ynh_config_remove_fail2ban
+
+ynh_config_remove_logrotate
+
 if ynh_hide_warnings yunohost service status $app >/dev/null; then
 	yunohost service remove $app
+fi
+if ynh_hide_warnings yunohost service status ${app}_workers >/dev/null; then
 	yunohost service remove ${app}_workers
 fi
 
@@ -22,8 +29,6 @@ ynh_config_remove_systemd "${app}"
 ynh_config_remove_systemd "${app}_workers"
 
 ynh_config_remove_nginx
-
-ynh_config_remove_logrotate
 
 ynh_redis_remove_db "$redis_db"
 

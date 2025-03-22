@@ -1,5 +1,5 @@
 [Unit]
-Description=__APP__ service
+Description=__APP__’s service
 After=network.target
 After=postgresql.service
 After=redis.service 
@@ -10,24 +10,33 @@ Restart=always
 RestartSec=1
 User=__APP__
 Group=__APP__
+WorkingDirectory=__INSTALL_DIR__/
+EnvironmentFile=__INSTALL_DIR__/.env
+ExecStart=__INSTALL_DIR__/venv/bin/gunicorn -b 127.0.0.1:__PORT__ "fittrackee:create_app()" --error-logfile /var/log/__APP__/__APP__.log
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
-SyslogIdentifier=__APP__
-EnvironmentFile=__INSTALL_DIR__/.env
-Environment="APP_SECRET_KEY="
-Environment="APP_LOG="
-Environment="UPLOAD_FOLDER="
-Environment="DATABASE_URL="
-Environment="UI_URL="
-Environment="EMAIL_URL="
-Environment="SENDER_EMAIL="
-Environment="REDIS_URL="
-Environment="TILE_SERVER_URL="
-Environment="STATICMAP_SUBDOMAINS="
-Environment="MAP_ATTRIBUTION="
-Environment="WEATHER_API_KEY="
-WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/venv/bin/gunicorn -b 127.0.0.1:__PORT__ "fittrackee:create_app()" --error-logfile /var/log/__APP__/__APP__.log
+
+### Depending on specificities of your service/app, you may need to tweak these
+### .. but this should be a good baseline
+# Sandboxing options to harden security
+# Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
+NoNewPrivileges=yes
+PrivateTmp=yes
+PrivateDevices=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+RestrictNamespaces=yes
+RestrictRealtime=yes
+DevicePolicy=closed
+ProtectClock=yes
+ProtectHostname=yes
+ProtectProc=invisible
+ProtectSystem=full
+ProtectControlGroups=yes
+ProtectKernelModules=yes
+ProtectKernelTunables=yes
+LockPersonality=yes
+SystemCallArchitectures=native
+SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation @privileged
 
 # Denying access to capabilities that should not be relevant for webapps
 # Doc: https://man7.org/linux/man-pages/man7/capabilities.7.html
