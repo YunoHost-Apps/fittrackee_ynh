@@ -1,5 +1,5 @@
 [Unit]
-Description=__APP__’s task queue service
+Description=__APP__ task queue service
 After=network.target
 After=postgresql.service
 After=redis.service

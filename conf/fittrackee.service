@@ -1,5 +1,5 @@
 [Unit]
-Description=__APP__’s service
+Description=__APP__ service
 After=network.target
 After=postgresql.service
 After=redis.service 
