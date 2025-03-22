@@ -30,8 +30,8 @@ No mobile app has been developed yet, but several existing mobile apps can store
 
 ## Документация и ресурсы
 
-- Официальный веб-сайт приложения: <https://samr1.github.io/FitTrackee>
-- Официальная документация администратора: <https://samr1.github.io/FitTrackee>
+- Официальный веб-сайт приложения: <https://docs.fittrackee.org/>
+- Официальная документация администратора: <https://docs.fittrackee.org/>
 - Репозиторий кода главной ветки приложения: <https://github.com/SamR1/FitTrackee>
 - Магазин YunoHost: <https://apps.yunohost.org/app/fittrackee>
 - Сообщите об ошибке: <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>

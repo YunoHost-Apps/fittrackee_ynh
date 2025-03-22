@@ -30,8 +30,8 @@ No mobile app has been developed yet, but several existing mobile apps can store
 
 ## 文档与资源
 
-- 官方应用网站： <https://samr1.github.io/FitTrackee>
-- 官方管理文档： <https://samr1.github.io/FitTrackee>
+- 官方应用网站： <https://docs.fittrackee.org/>
+- 官方管理文档： <https://docs.fittrackee.org/>
 - 上游应用代码库： <https://github.com/SamR1/FitTrackee>
 - YunoHost 商店： <https://apps.yunohost.org/app/fittrackee>
 - 报告 bug： <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>
