@@ -42,7 +42,7 @@ ynh_script_progression --message="Reinstalling pip requirements..." --weight=70
 # Always recreate everything fresh with current python version
 # When reinstalling on a new yunohost, this is required
 if [ -d "${install_dir}/venv" ] ; then
-	ynh_secure_remove "${install_dir}/venv"
+	ynh_safe_rm "${install_dir}/venv"
 fi
 
 pushd "$install_dir"
