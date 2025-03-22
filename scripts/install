@@ -58,6 +58,9 @@ pushd "$install_dir"
 popd
 
 #Logrotate has to be added now, because the app won’t start if there are no logs files
+touch /var/log/$app/$app.log
+touch /var/log/$app/${app}_workers.log
+chown -R $app:www-data /var/log/$app/
 ynh_config_add_logrotate
 
 #=================================================
