@@ -22,39 +22,6 @@ ynh_script_progression "Restoring the data directory..."
 ynh_restore "$data_dir"
 
 #=================================================
-# INSTALL PYTHON DEPENDENCIES
-#=================================================
-ynh_script_progression "Installing Python dependencies..."
-
-if [ $YNH_ARCH == "armhf" ] || [ $YNH_ARCH == "armel" ]
-then
-# Install rustup if not already installed
-# We need this to be able to install cryptgraphy on ARM hardware
-export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sbin"
-    if [ -e $install_dir/.rustup ]; then
-    ynh_exec_as_app PATH=$PATH rustup update
-    else
-    ynh_exec_as_app bash -c 'curl -sSf -L https://static.rust-lang.org/rustup.sh | sh -s -- -y --default-toolchain=stable --profile=minimal'
-    fi
-fi
-
-ynh_script_progression --message="Reinstalling pip requirements..." --weight=70
-# Always recreate everything fresh with current python version
-# When reinstalling on a new yunohost, this is required
-if [ -d "${install_dir}/venv" ] ; then
-	ynh_safe_rm "${install_dir}/venv"
-fi
-
-pushd "$install_dir"
-    ynh_exec_as_app python3 -m venv "$install_dir/venv"
-    ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install --upgrade wheel toml pyyaml
-    ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install fittrackee=="$(ynh_app_upstream_version)"
-
-    ynh_safe_rm "$install_dir/.cache/pip"
-popd
-
-
-#=================================================
 # RESTORE THE POSTGRESQL DATABASE
 #=================================================
 ynh_script_progression "Restoring the PostgreSQL database..."
