@@ -58,7 +58,7 @@ fi
 pushd "$install_dir"
 if ynh_app_upgrading_from_version_before 0.9.4~ynh1
 then
-chown -R $app:www-data "$install_dir"
+chown -R "$app":"$app" "$install_dir"
 fi
     ynh_exec_as_app python3 -m venv "$install_dir/venv"
     ynh_hide_warnings ynh_exec_as_app "$install_dir/venv/bin/pip" install --upgrade pip wheel toml pyyaml
