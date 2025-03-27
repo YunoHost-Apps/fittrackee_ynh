@@ -22,7 +22,7 @@ FitTrackee allows you to track your outdoor activities (workouts) from gpx files
 No mobile app has been developed yet, but several existing mobile apps can store workouts data locally and export them into a gpx file.
 
 
-**Shipped version:** 0.9.3~ynh1
+**Shipped version:** 0.9.4~ynh1
 
 ## Screenshots
 
@@ -30,8 +30,8 @@ No mobile app has been developed yet, but several existing mobile apps can store
 
 ## Documentation and resources
 
-- Official app website: <https://samr1.github.io/FitTrackee>
-- Official admin documentation: <https://samr1.github.io/FitTrackee>
+- Official app website: <https://docs.fittrackee.org/>
+- Official admin documentation: <https://docs.fittrackee.org/>
 - Upstream app code repository: <https://github.com/SamR1/FitTrackee>
 - YunoHost Store: <https://apps.yunohost.org/app/fittrackee>
 - Report a bug: <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>

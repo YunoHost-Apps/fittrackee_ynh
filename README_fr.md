@@ -21,7 +21,7 @@ Il NE doit PAS être modifié à la main.
 FitTrackee vous permet de suivre vos activités de plein air (séances d'entraînement) à partir de fichiers gpx et de conserver vos données sur votre propre serveur.
 Aucune application mobile n'a encore été développée, mais plusieurs applications mobiles existantes peuvent stocker localement les données des séances d'entraînement et les exporter dans un fichier gpx.
 
-**Version incluse :** 0.9.3~ynh1
+**Version incluse :** 0.9.4~ynh1
 
 ## Captures d’écran
 
@@ -29,8 +29,8 @@ Aucune application mobile n'a encore été développée, mais plusieurs applicat
 
 ## Documentations et ressources
 
-- Site officiel de l’app : <https://samr1.github.io/FitTrackee>
-- Documentation officielle de l’admin : <https://samr1.github.io/FitTrackee>
+- Site officiel de l’app : <https://docs.fittrackee.org/>
+- Documentation officielle de l’admin : <https://docs.fittrackee.org/>
 - Dépôt de code officiel de l’app : <https://github.com/SamR1/FitTrackee>
 - YunoHost Store : <https://apps.yunohost.org/app/fittrackee>
 - Signaler un bug : <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>
