@@ -56,7 +56,7 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
 fi
 
 pushd "$install_dir"
-if ynh_app_upgrading_from_version_before 0.9.3~ynh1
+if ynh_app_upgrading_from_version_before 0.9.4~ynh1
 then
 chown -R $app:www-data "$install_dir"
 fi
