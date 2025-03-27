@@ -44,6 +44,7 @@ systemctl enable "${app}_workers.service" --quiet
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="/var/log/$app/${app}_workers.log"
 
+mkdir -p "/var/log/"$app""
 ynh_restore "/etc/logrotate.d/$app"
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}_workers.log
