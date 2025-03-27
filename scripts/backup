@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
@@ -15,16 +19,29 @@ ynh_backup "$install_dir"
 # BACKUP THE DATA DIR
 #=================================================
 
+# NB: /var/log is not backuped during safety-backup-before-upgrades
 ynh_backup "$data_dir"
 
 #=================================================
-# SYSTEM CONFIGURATION
+# BACKUP SYSTEM CONFIGURATION
 #=================================================
 
 ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 ynh_backup "/etc/systemd/system/${app}.service"
 ynh_backup "/etc/systemd/system/${app}_workers.service"
+
+ynh_backup "/etc/logrotate.d/$app"
+
+ynh_backup "/etc/fail2ban/jail.d/$app.conf"
+ynh_backup "/etc/fail2ban/filter.d/$app.conf"
+
+#=================================================
+# BACKUP VARIOUS FILES
+#=================================================
+
+# NB: /var/log is not backuped during safety-backup-before-upgrades, same as $data_dir
+ynh_backup "/var/log/$app/"
 
 #=================================================
 # BACKUP THE POSTGRESQL DATABASE

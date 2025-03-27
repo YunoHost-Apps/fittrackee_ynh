@@ -22,7 +22,7 @@ FitTrackee allows you to track your outdoor activities (workouts) from gpx files
 No mobile app has been developed yet, but several existing mobile apps can store workouts data locally and export them into a gpx file.
 
 
-**Paketatutako bertsioa:** 0.9.3~ynh2
+**Paketatutako bertsioa:** 0.9.4~ynh1
 
 ## Pantaila-argazkiak
 
@@ -30,8 +30,8 @@ No mobile app has been developed yet, but several existing mobile apps can store
 
 ## Dokumentazioa eta baliabideak
 
-- Aplikazioaren webgune ofiziala: <https://samr1.github.io/FitTrackee>
-- Administratzaileen dokumentazio ofiziala: <https://samr1.github.io/FitTrackee>
+- Aplikazioaren webgune ofiziala: <https://docs.fittrackee.org/>
+- Administratzaileen dokumentazio ofiziala: <https://docs.fittrackee.org/>
 - Jatorrizko aplikazioaren kode-gordailua: <https://github.com/SamR1/FitTrackee>
 - YunoHost Denda: <https://apps.yunohost.org/app/fittrackee>
 - Eman errore baten berri: <https://github.com/YunoHost-Apps/fittrackee_ynh/issues>
@@ -40,7 +40,7 @@ No mobile app has been developed yet, but several existing mobile apps can store
 
 Bidali `pull request`a [`testing` abarrera](https://github.com/YunoHost-Apps/fittrackee_ynh/tree/testing).
 
-`testing` abarra probatzeko, ondorengoa egin:
+`testing` abarra probatzeko, honakoa egin:
 
 ```bash
 sudo yunohost app install https://github.com/YunoHost-Apps/fittrackee_ynh/tree/testing --debug

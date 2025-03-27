@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
@@ -25,9 +29,9 @@ ynh_script_progression "Restoring the PostgreSQL database..."
 ynh_psql_db_shell  < "./db.sql"
 
 #=================================================
-# RESTORE THE NGINX CONFIGURATION
+# RESTORE SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression "Restoring the NGINX web server configuration..."
+ynh_script_progression "Restoring system configurations related to $app..."
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
@@ -40,16 +44,20 @@ systemctl enable "${app}_workers.service" --quiet
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
 yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="/var/log/$app/${app}_workers.log"
 
-# Use logrotate to manage application logfile(s)
-ynh_config_add_logrotate
+mkdir -p "/var/log/"$app""
+ynh_restore "/etc/logrotate.d/$app"
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}_workers.log
 chown -R $app:www-data /var/log/$app/
 
+ynh_restore "/etc/fail2ban/jail.d/$app.conf"
+ynh_restore "/etc/fail2ban/filter.d/$app.conf"
+ynh_systemctl --action=restart --service=fail2ban
+
 #=================================================
-# START SYSTEMD SERVICE
+# RELOAD NGINX AND THE APP SERVICE
 #=================================================
-ynh_script_progression "Starting $app's systemd service..."
+ynh_script_progression "Reloading NGINX web server and $app's services..."
 
 ynh_systemctl --service="${app}" --action="start"
 
