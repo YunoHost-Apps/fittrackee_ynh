@@ -82,7 +82,6 @@ ram.runtime = "50M"
     ask.ca = "(Opcional) Inserir la clau de l'API del proveïdor del temps escollit"
     ask.fr = "(Optionnel) Insérez ici la clé API du fournisseur de météo choisi"
     type = "string"
-    default = false
     optional = true
 
   [resources]
