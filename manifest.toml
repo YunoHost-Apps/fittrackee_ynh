@@ -44,8 +44,8 @@ ram.runtime = "50M"
 
     [install.admin]
     type = "user"
-    help.en = "You will have to login with the email of this user and the password you’ll set below."
-    help.fr = "Vous devrez vous connecter avec l’adresse courriel de cet utilisateur et le mot de passe configuré ci-dessous."
+    help.en = "You will have to login with the email of this user and the password you’ll set below. ❗Your username has to be minimum 3 caraters long."
+    help.fr = "Vous devrez vous connecter avec l’adresse courriel de cet utilisateur et le mot de passe configuré ci-dessous. ❗Votre nom d’utilisateur doit être long d’au moins 3 caractères."
 
     [install.password]
     help.en = "Choose a password for your admin user here."
