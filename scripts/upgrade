@@ -36,7 +36,7 @@ ynh_app_setting_set_default --key=weather_key --value=$weather_api_key
 #=================================================
 ynh_script_progression "Updating $app's configuration files..."
 
-ynh_config_add --template=".env.production" --destination="$install_dir/.env"
+ynh_config_add --template=".env" --destination="$install_dir/.env"
 
 #=================================================
 # INSTALL PYTHON DEPENDENCIES

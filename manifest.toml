@@ -16,7 +16,6 @@ maintainers = ["Thovi98"]
 [upstream]
 license = "AGPL-3.0-only"
 website = "https://docs.fittrackee.org/"
-demo = ""
 admindoc = "https://docs.fittrackee.org/"
 code = "https://github.com/SamR1/FitTrackee"
 
