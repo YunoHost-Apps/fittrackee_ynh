@@ -9,14 +9,13 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "0.11.1~ynh1"
+version = "0.11.2~ynh1"
 
 maintainers = ["Thovi98"]
 
 [upstream]
 license = "AGPL-3.0-only"
 website = "https://docs.fittrackee.org/"
-demo = ""
 admindoc = "https://docs.fittrackee.org/"
 code = "https://github.com/SamR1/FitTrackee"
 
