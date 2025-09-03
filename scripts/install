@@ -7,6 +7,11 @@
 
 source /usr/share/yunohost/helpers
 
+if ynh_in_ci_tests
+then
+	yunohost tools regen-conf postgresql
+fi
+
 #=================================================
 # INITIALIZE AND STORE SETTINGS
 #=================================================
