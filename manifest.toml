@@ -99,7 +99,7 @@ ram.runtime = "50M"
     main.default = 5000
 
     [resources.apt]
-    packages = "postgresql, postgresql-contrib, postgis, python3, python3-venv, libopenjp2-7, redis-server"
+    packages = "postgresql, postgresql-contrib, postgresql-postgis, python3, python3-venv, libopenjp2-7, redis-server"
 
     [resources.database]
     type = "postgresql"
