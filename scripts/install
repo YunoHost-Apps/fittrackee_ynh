@@ -7,11 +7,6 @@
 
 source /usr/share/yunohost/helpers
 
-if ynh_in_ci_tests
-then
-	yunohost tools regen-conf postgresql
-fi
-
 #=================================================
 # INITIALIZE AND STORE SETTINGS
 #=================================================
@@ -34,6 +29,16 @@ ynh_app_setting_set --key=redis_db --value=$redis_db
 ynh_script_progression "Adding $app's configuration files..."
 
 ynh_config_add --template=".env" --destination="$install_dir/.env"
+
+#=================================================
+# PREPARE A POSTGRESQL DATABASE
+#=================================================
+ynh_script_progression "Configuring the PostgreSQL database..."
+
+#Create postgis extension
+ynh_psql_db_shell <<< "ALTER USER $db_user WITH SUPERUSER;"
+ynh_psql_db_shell <<< "CREATE EXTENSION IF NOT EXISTS postgis;"
+ynh_psql_db_shell <<< "ALTER USER $db_user WITH NOSUPERUSER;"
 
 #=================================================
 # INSTALL PYTHON DEPENDENCIES
