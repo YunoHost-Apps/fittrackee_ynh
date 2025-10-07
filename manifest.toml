@@ -9,6 +9,8 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
+
+
 version = "1.0.0~ynh2"
 
 maintainers = ["Thovi98"]
@@ -99,7 +101,9 @@ ram.runtime = "50M"
     main.default = 5000
 
     [resources.apt]
+
     packages = "postgresql, postgresql-contrib, postgresql-postgis, python3, python3-venv, libopenjp2-7, redis-server"
+
 
     [resources.database]
     type = "postgresql"
