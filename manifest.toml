@@ -57,7 +57,7 @@ ram.runtime = "50M"
     ask.fr = "Choisissez la langue de l'application"
     type = "select"
     # choices can be retrieved in fittrackee/config.py SUPPORTED_LANGUAGES
-    choices = ["bg", bn, "ca", "cs", "de", "en", "es", "eu", "fi", "fr", "gl", "hr", "it", "kab", "nb", "nl", "pl", "pt", "ru", "sl", "tr", "zh_Hans"]
+    choices = ["bg", "bn", "ca", "cs", "de", "en", "es", "eu", "fi", "fr", "gl", "hr", "it", "kab", "nb", "nl", "pl", "pt", "ru", "sl", "tr", "zh_Hans"]
     default = "en"
 
     [install.weather_api_provider]
