@@ -26,9 +26,13 @@ ynh_systemctl --action="stop" --service="${app}_workers"
 #=================================================
 ynh_script_progression "Ensuring downward compatibility..."
 
-ynh_app_setting_set_default --key=redis_db --value=$(ynh_redis_get_free_db)
 ynh_app_setting_set_default --key=weather_provider --value=$weather_api_provider
 ynh_app_setting_set_default --key=weather_key --value=$weather_api_key
+
+ynh_app_setting_set_default --key=open_elevation_api_url --value=""
+ynh_app_setting_set_default --key=valhalla_api_url --value=""
+
+ynh_app_setting_set_default --key=redis_db --value=$(ynh_redis_get_free_db)
 
 #=================================================
 # APP CONFIG FILES
@@ -65,6 +69,7 @@ export PATH="$PATH:$install_dir/.cargo/bin:$install_dir/.local/bin:/usr/local/sb
 fi
 
 pushd "$install_dir"
+# This is because a permission issue (I don’t know anymore what was the problem)
 if ynh_app_upgrading_from_version_before 0.9.4~ynh1
 then
 chown -R "$app":"$app" "$install_dir"
@@ -93,11 +98,6 @@ ynh_hide_warnings $install_dir/venv/bin/ftcli db upgrade
 if ynh_app_upgrading_from_version_before 0.9.0~ynh1
 then
    ynh_hide_warnings $install_dir/venv/bin/ftcli users update $admin --set-role owner
-fi
-
-if ynh_app_upgrading_from_version_before 1.0.0~ynh1
-then
-   ynh_hide_warnings $install_dir/venv/bin/ftcli workouts refresh --add-missing-geometry --per-page 100000 -v
 fi
 
 set +a

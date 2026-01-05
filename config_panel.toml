@@ -18,28 +18,44 @@ services = ["__APP__", "__APP___workers"]
     name.fr = "Options de configuration"
 
         [main.config.data_dir]
-        ask.en = "Change data directory"
-        ask.fr = "Changer le répertoire de données"
+        ask.en = "Change data directory."
+        ask.fr = "Changer le répertoire de données."
         type = "path"
         default = "/home/yunohost.app/__APP__/"
-        help.en = "Change the data directory where are stored all the uploaded .gpx files and the profile pictures"
-        help.fr = "Change le répertoire de données où sont stockés tous les fichiers .gpx téléversés et les photos de profil"
+        help.en = "Change the data directory where are stored all the uploaded .gpx files and the profile pictures."
+        help.fr = "Change le répertoire de données où sont stockés tous les fichiers .gpx téléversés et les photos de profil."
         bind = "UPLOAD_FOLDER:/var/www/__APP__/.env"
 
         [main.config.weather_api_provider]
-        ask.en = "Change weather provider"
-        ask.fr = "Changer le fournisseur météo"
+        ask.en = "Change weather provider."
+        ask.fr = "Changer le fournisseur météo."
         type = "select"
         choices = ["", "visualcrossing"]
         default = "visualcrossing"
-        help.en = "Change your weather provider by choosing one of the proposed ones"
-        help.fr = "Changer votre fournisseur météo en choisissant un de ceux qui vous sont proposés"
+        help.en = "Change your weather provider by choosing one of the proposed ones."
+        help.fr = "Changer votre fournisseur météo en choisissant un de ceux qui vous sont proposés."
         bind = "WEATHER_API_PROVIDER:/var/www/__APP__/.env"
 
         [main.config.weather_api_key]
-        ask.en = "Change weather api key"
-        ask.fr = "Changer la clé api pour la météo"
+        ask.en = "Change weather api key."
+        ask.fr = "Changer la clé api pour la météo."
         type = "string"
-        help.en = "Set the api key given by the chosen weather provider"
-        help.fr = "Insérer la clé api donnée par le fournisseur météo choisi"
+        help.en = "Set the api key given by the chosen weather provider."
+        help.fr = "Insérer la clé api donnée par le fournisseur météo choisi."
         bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
+
+        [main.config.open_elevation_api_url]
+        ask.en = "Add an Open Elevation API URL."
+        ask.fr = "Ajouter l’URL API pour Open Elevation."
+        type = "string"
+        help.en = "URL of OpenElevation service (public API or self-hosted instance)."
+        help.fr = "URL du service OpenElevation (API publique ou instance auto-hébergée)."
+        bind = "OPEN_ELEVATION_API_URL:/var/www/__APP__/.env"
+
+        [main.config.valhalla_api_url]
+        ask.en = "Add a Valhalla API URL."
+        ask.fr = "Ajouter l’URL API pour Valhalla."
+        type = "string"
+        help.en = "URL of Valhalla service (public API or self-hosted instance)."
+        help.fr = "URL du service Valhalla (API publique ou instance auto-hébergée)."
+        bind = "VALHALLA_API_URL:/var/www/__APP__/.env"
