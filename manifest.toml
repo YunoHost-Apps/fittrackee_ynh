@@ -20,7 +20,7 @@ admindoc = "https://docs.fittrackee.org/"
 code = "https://github.com/SamR1/FitTrackee"
 
 [integration]
-yunohost = ">= 12.1.38"
+yunohost = ">= 12.1.39"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
