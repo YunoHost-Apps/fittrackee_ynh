@@ -9,7 +9,7 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "1.0.6~ynh2"
+version = "1.1.0~ynh1"
 
 maintainers = ["Thovi98"]
 
@@ -57,7 +57,7 @@ ram.runtime = "50M"
     ask.fr = "Choisissez la langue de l'application"
     type = "select"
     # choices can be retrieved in fittrackee/config.py SUPPORTED_LANGUAGES
-    choices = ["cs", "de", "en", "es", "eu", "fr", "gl", "it", "nb", "nl", "pl", "pt"]
+    choices = ["bg", "bn", "ca", "cs", "de", "en", "es", "eu", "fi", "fr", "gl", "hr", "it", "kab", "nb", "nl", "pl", "pt", "ru", "sl", "tr", "zh_Hans"]
     default = "en"
 
     [install.weather_api_provider]

@@ -16,6 +16,11 @@ admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 ynh_app_setting_set --key=weather_api_provider --value=$weather_api_provider
 ynh_app_setting_set --key=weather_api_key --value=$weather_api_key
 
+open_elevation_api_url=""
+ynh_app_setting_set --key=open_elevation_api_url --value=$open_elevation_api_url
+valhalla_api_url=""
+ynh_app_setting_set --key=valhalla_api_url --value=$valhalla_api_url
+
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --key=key --value=$key
 
