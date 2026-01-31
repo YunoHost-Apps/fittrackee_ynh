@@ -95,9 +95,9 @@ then
    ynh_hide_warnings $install_dir/venv/bin/ftcli users update $admin --set-role owner
 fi
 
-if ynh_app_upgrading_from_version_before 1.0.0~ynh1
+if ynh_app_upgrading_from_version_before 1.0.7~ynh1
 then
-   ynh_hide_warnings $install_dir/venv/bin/ftcli workouts refresh --add-missing-geometry --per-page 100000 -v
+   ynh_hide_warnings $install_dir/venv/bin/ftcli workouts refresh --add-missing-geometry --on-file-error remove-references --per-page 100000 -v
 fi
 
 set +a
