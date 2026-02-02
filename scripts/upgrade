@@ -105,6 +105,11 @@ then
    ynh_hide_warnings $install_dir/venv/bin/ftcli workouts refresh --per-page 100000 -v
 fi
 
+if ynh_app_upgrading_from_version_before 1.1.1~ynh1
+then
+   ynh_hide_warnings $install_dir/venv/bin/ftcli workouts refresh --without-file
+fi
+
 set +a
 
 #=================================================
