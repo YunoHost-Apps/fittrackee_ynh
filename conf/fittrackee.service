@@ -2,7 +2,7 @@
 Description=__APP__ service
 After=network.target
 After=postgresql.service
-After=redis.service 
+After=redis.service
 
 [Service]
 Type=simple
