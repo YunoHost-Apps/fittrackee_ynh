@@ -1,6 +1,6 @@
 
 ## -----------------------------------------------------------------------------
-## IMPORTANT: In accordance with YunoHost's spirit, please keep things simple and 
+## IMPORTANT: In accordance with YunoHost's spirit, please keep things simple and
 ## do not overwhelm the admin with tons of misunderstandable or advanced settings.
 ## -----------------------------------------------------------------------------
 
@@ -12,7 +12,7 @@ name.en = "Main configuration"
 name.fr = "Configuration principale"
 services = ["__APP__", "__APP___workers"]
 
-     
+
     [main.config]
     name.en = "Configuration options"
     name.fr = "Options de configuration"
