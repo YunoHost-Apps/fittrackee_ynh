@@ -19,7 +19,15 @@ admin_mail=$(ynh_user_get_info --username=$admin --key=mail)
 ynh_script_progression "Stopping $app's systemd service..."
 
 ynh_systemctl --action="stop" --service="${app}"
-ynh_systemctl --action="stop" --service="${app}_workers"
+ynh_systemctl --action="stop" --service="${app}-workers"
+
+if ynh_app_upgrading_from_version_before 1.2.0~ynh1
+then
+   if ynh_hide_warnings yunohost service status ${app}_workers >/dev/null; then
+	yunohost service remove ${app}_workers
+   fi
+   ynh_config_remove_systemd "${app}_workers"
+fi
 
 #=================================================
 # ENSURE DOWNWARD COMPATIBILITY
@@ -120,10 +128,10 @@ ynh_script_progression "Upgrading system configurations related to $app..."
 ynh_config_add_nginx
 
 ynh_config_add_systemd --service="${app}"   --template="fittrackee.service"
-ynh_config_add_systemd --service="${app}_workers" --template="fittrackee_workers.service"
+ynh_config_add_systemd --service="${app}-workers" --template="fittrackee-workers.service"
 
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
-yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="/var/log/$app/${app}_workers.log"
+yunohost service add "${app}-workers" --description="Fittrackee task queue service" --log="/var/log/$app/${app}-workers.log"
 
 #ynh_hide_warnings has to be set for the Bookworm version of fail2ban, further OS realease have this bug resoled (normally)
 ynh_hide_warnings ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-access.log" --failregex="<HOST>.* \"POST /api/auth/login HTTP/\d.\d\" 40"
@@ -134,7 +142,7 @@ ynh_hide_warnings ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-ac
 ynh_script_progression "Starting $app's systemd services..."
 
 ynh_systemctl --service="${app}" --action="start"
-ynh_systemctl --service="${app}_workers" --action="start"
+ynh_systemctl --service="${app}-workers" --action="start"
 
 #=================================================
 # END OF SCRIPT

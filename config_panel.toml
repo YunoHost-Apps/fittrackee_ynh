@@ -10,7 +10,7 @@ version = "1.0"
 [main]
 name.en = "Main configuration"
 name.fr = "Configuration principale"
-services = ["__APP__", "__APP___workers"]
+services = ["__APP__", "__APP__-workers"]
 
 
     [main.config]

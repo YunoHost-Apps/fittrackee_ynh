@@ -72,8 +72,7 @@ popd
 #Logrotate has to be added now, because the app won’t start if there are no logs files
 ynh_config_add_logrotate
 touch /var/log/$app/$app.log
-touch /var/log/$app/${app}_workers.log
-chown -R $app:www-data /var/log/$app/
+touch /var/log/$app/${app}-workers.log
 
 #=================================================
 # INITIALIZE DATABASE
@@ -98,10 +97,10 @@ ynh_script_progression "Adding system configurations related to $app..."
 ynh_config_add_nginx
 
 ynh_config_add_systemd --service="${app}" --template="fittrackee.service"
-ynh_config_add_systemd --service="${app}_workers" --template="fittrackee_workers.service"
+ynh_config_add_systemd --service="${app}-workers" --template="fittrackee-workers.service"
 
 yunohost service add "${app}" --description="Fittrackee main service" --log="/var/log/$app/$app.log"
-yunohost service add "${app}_workers" --description="Fittrackee task queue service" --log="/var/log/$app/${app}_workers.log"
+yunohost service add "${app}-workers" --description="Fittrackee task queue service" --log="/var/log/$app/${app}-workers.log"
 
 #ynh_hide_warnings has to be set for the Bookworm version of fail2ban, further OS realease have this bug resoled (normally)
 ynh_hide_warnings ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-access.log" --failregex="<HOST>.* \"POST /api/auth/login HTTP/\d.\d\" 40"
@@ -112,7 +111,7 @@ ynh_hide_warnings ynh_config_add_fail2ban --logpath="/var/log/nginx/${domain}-ac
 ynh_script_progression "Starting $app's systemd services..."
 
 ynh_systemctl --service="${app}" --action="start"
-ynh_systemctl --service="${app}_workers" --action="start"
+ynh_systemctl --service="${app}-workers" --action="start"
 
 #=================================================
 # END OF SCRIPT
