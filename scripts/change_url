@@ -20,7 +20,7 @@ ynh_script_progression "Stopping $app's systemd service..."
 
 ynh_systemctl --action="stop" --service="${app}"
 
-ynh_systemctl --action="stop" --service="${app}_workers"
+ynh_systemctl --action="stop" --service="${app}-workers"
 
 #=================================================
 # MODIFY URL IN NGINX CONF
@@ -44,7 +44,7 @@ ynh_script_progression "Starting $app's systemd services..."
 
 ynh_systemctl --service="${app}" --action="start"
 
-ynh_systemctl --service="${app}_workers" --action="start"
+ynh_systemctl --service="${app}-workers" --action="start"
 
 #=================================================
 # END OF SCRIPT
