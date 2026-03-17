@@ -73,6 +73,7 @@ popd
 ynh_config_add_logrotate
 touch /var/log/$app/$app.log
 touch /var/log/$app/${app}-workers.log
+chown -R $app: "/var/log/$app"
 
 #=================================================
 # INITIALIZE DATABASE
