@@ -26,7 +26,7 @@ Self-hosted outdoor activity tracker 🚴
 
 [![Automatic tests level](https://apps.yunohost.org/badge/cilevel/fittrackee)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
 
-🛠️ Upstream FitTrackee repository: <https://github.com/SamR1/FitTrackee>
+🛠️ Upstream FitTrackee repository: <https://codeberg.org/FitTrackee/FitTrackee>
 
 Pull request are welcome and should target the [`testing` branch](https://github.com/YunoHost-Apps/fittrackee_ynh/tree/testing).
 
