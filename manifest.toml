@@ -17,7 +17,7 @@ maintainers = ["Thovi98"]
 license = "AGPL-3.0-only"
 website = "https://docs.fittrackee.org/"
 admindoc = "https://docs.fittrackee.org/"
-code = "https://github.com/SamR1/FitTrackee"
+code = "https://codeberg.org/FitTrackee/FitTrackee"
 
 [integration]
 yunohost = ">= 12.1.39"
