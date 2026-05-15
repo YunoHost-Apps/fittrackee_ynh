@@ -9,7 +9,7 @@ description.gl = "Rexistra as túas actividades ao aire libre 🚴"
 description.ca = "Seguiment d'activitats a l'aire lliure autoallotjat 🚴"
 description.fr = "Traqueur d’activités extérieures auto-hébergé 🚴"
 
-version = "1.3.0b3~ynh1"
+version = "1.3.0b4~ynh1"
 
 maintainers = ["Thovi98"]
 
