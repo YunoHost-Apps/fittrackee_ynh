@@ -11,7 +11,7 @@ It shall NOT be edited by hand.
 Self-hosted outdoor activity tracker 🚴
 
 [![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://docs.fittrackee.org/)
-[![Version: 1.2.2~ynh2](https://img.shields.io/badge/Version-1.2.2~ynh2-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
+[![Version: 1.3.0~ynh1](https://img.shields.io/badge/Version-1.3.0~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
 
 <div align="center">
 <a href="https://apps.yunohost.org/app/fittrackee"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
@@ -26,7 +26,7 @@ Self-hosted outdoor activity tracker 🚴
 
 [![Automatic tests level](https://apps.yunohost.org/badge/cilevel/fittrackee)](https://ci-apps.yunohost.org/ci/apps/fittrackee/)
 
-🛠️ Upstream FitTrackee repository: <https://github.com/SamR1/FitTrackee>
+🛠️ Upstream FitTrackee repository: <https://codeberg.org/FitTrackee/FitTrackee>
 
 Pull request are welcome and should target the [`testing` branch](https://github.com/YunoHost-Apps/fittrackee_ynh/tree/testing).
 
