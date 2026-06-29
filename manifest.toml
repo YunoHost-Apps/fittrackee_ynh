@@ -83,6 +83,26 @@ ram.runtime = "50M"
     optional = true
 
   [resources]
+    [resources.sources]
+
+      [resources.sources.x64_bookworm]
+      url = "https://github.com/orhtej2/numpy-binary/releases/download/v2.4.6/numpy-2.4.6.tar.gz"
+      sha256 = "11111bed641e372524dfc0718cf2ef3b138ee780b991d147580d831acb7a9f4c"
+      prefetch = false
+      in_subdir = false
+      autoupdate.strategy = "latest_github_release"
+      autoupdate.upstream = "https://github.com/orhtej2/numpy-binary"
+      autoupdate.asset = "numpy-\\d+\\.\\d+\\.\\d+-python3.11\\.tar\\.gz$"
+
+      [resources.sources.x64_trixie]
+      url = "https://github.com/orhtej2/numpy-binary/releases/download/v2.4.6/numpy-2.4.6-python3.13.tar.gz"
+      sha256 = "11111bed641e372524dfc0718cf2ef3b138ee780b991d147580d831acb7a9f4c"
+      prefetch = false
+      in_subdir = false
+      autoupdate.strategy = "latest_github_release"
+      autoupdate.upstream = "https://github.com/orhtej2/numpy-binary"
+      autoupdate.asset = "numpy-\\d+\\.\\d+\\.\\d+-python3.13\\.tar\\.gz$"
+
     [resources.system_user]
     allow_email = true
 
