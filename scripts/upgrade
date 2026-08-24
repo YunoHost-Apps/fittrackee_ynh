@@ -121,6 +121,11 @@ then
    ynh_hide_warnings $install_dir/venv/bin/ftcli workouts refresh --without-file
 fi
 
+if ynh_app_upgrading_from_version_before 1.4.0b1~ynh1
+then
+   ynh_hide_warnings $install_dir/venv/bin/ftcli workouts rebuild_heatmap
+fi
+
 set +a
 
 #=================================================
