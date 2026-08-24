@@ -14,7 +14,7 @@ services = ["__APP__", "__APP__-workers"]
 
     [tiles.config]
 
-        [tiles.custom_tile_provider_url]
+        [tiles.config.custom_tile_provider_url]
         ask.en = "Change the default tile url."
         ask.fr = "Changer l'url de la tuile par défaut."
         type = "string"
@@ -31,8 +31,8 @@ services = ["__APP__", "__APP__-workers"]
         bind = "CUSTOM_TILE_PROVIDER_ATTRIBUTION:/var/www/__APP__/.env"
 
         [tiles.config.custom_tile_provider_subdomains]
-        ask.en = "If needed, change the default tile subdomain."
-        ask.fr = "Si nécessaire, changer l'url de la tuile par défaut."
+        ask.en = "Change the default tile subdomain."
+        ask.fr = "Changer l'url de la tuile par défaut."
         type = "string"
         default = ""
         bind = "CUSTOM_TILE_PROVIDER_SUBDOMAINS:/var/www/__APP__/.env"
