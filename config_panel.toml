@@ -12,16 +12,18 @@ name.en = "Tiles configuration"
 name.fr = "Configuration des tuiles"
 services = ["__APP__", "__APP__-workers"]
 
-    [tiles.config]
+    [tiles.default]
+    name.en = "Default tiles"
+    name.fr = "Tuiles par défaut"
 
-        [tiles.config.custom_tile_provider_url]
+        [tiles.default.custom_tile_provider_url]
         ask.en = "Change the default tile url."
         ask.fr = "Changer l'url de la tuile par défaut."
         type = "string"
         default = ""
         bind = "CUSTOM_TILE_PROVIDER_URL:/var/www/__APP__/.env"
 
-        [tiles.config.custom_tile_provider_attribution]
+        [tiles.default.custom_tile_provider_attribution]
         ask.en = "Change the default tile attribution."
         ask.fr = "Changer l'attribution de la tuile par défaut."
         type = "string"
@@ -30,20 +32,24 @@ services = ["__APP__", "__APP__-workers"]
         help.fr = "par ex.: '&copy; <a href=\"http://www.openstreetmap.org/copyright\" target=\"_blank\" rel=\"noopener noreferrer\">OpenStreetMap</a> contributors'"
         bind = "CUSTOM_TILE_PROVIDER_ATTRIBUTION:/var/www/__APP__/.env"
 
-        [tiles.config.custom_tile_provider_subdomains]
+        [tiles.default.custom_tile_provider_subdomains]
         ask.en = "Change the default tile subdomain."
         ask.fr = "Changer l'url de la tuile par défaut."
         type = "string"
         default = ""
         bind = "CUSTOM_TILE_PROVIDER_SUBDOMAINS:/var/www/__APP__/.env"
 
-        [tiles.config.stadiamaps_api_key]
+    [tiles.other]
+    name.en = "Other tile providers"
+    name.fr = "Autres fournisseurs de tuiles"
+
+        [tiles.other.stadiamaps_api_key]
         ask.en = "Add an API key for Stadia Maps tile provider."
         ask.fr = "Ajouter une clé API pour le fournisseur de tuiles Stadia Maps."
         type = "string"
         bind = "STADIAMAPS_API_KEY:/var/www/__APP__/.env"
 
-        [tiles.config.thunderforest_api_key]
+        [tiles.other.thunderforest_api_key]
         ask.en = "Add an API key for Thunderforest tile provider."
         ask.fr = "Ajouter une clé API pour le fournisseur de tuiles Thunderforest."
         type = "string"
@@ -54,19 +60,21 @@ name.en = "Geo configuration"
 name.fr = "Configuration des paramètres de géographie/géologie"
 services = ["__APP__", "__APP__-workers"]
 
-    [geo.config]
+    [geo.weather]
+    name.en = "Weather options"
+    name.fr = "Options de météo"
 
-        [geo.config.weather_api_provider]
+        [geo.weather.weather_api_provider]
         ask.en = "Change weather provider."
         ask.fr = "Changer le fournisseur météo."
         type = "select"
-        choices = ["", "visualcrossing"]
+        choices = ["visualcrossing"]
         default = "visualcrossing"
         help.en = "Change your weather provider by choosing one of the proposed ones."
         help.fr = "Changer votre fournisseur météo en choisissant un de ceux qui vous sont proposés."
         bind = "WEATHER_API_PROVIDER:/var/www/__APP__/.env"
 
-        [geo.config.weather_api_key]
+        [geo.weather.weather_api_key]
         ask.en = "Change weather api key."
         ask.fr = "Changer la clé api pour la météo."
         type = "string"
@@ -74,7 +82,11 @@ services = ["__APP__", "__APP__-workers"]
         help.fr = "Insérer la clé api donnée par le fournisseur météo choisi."
         bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
 
-        [geo.config.open_elevation_api_url]
+    [geo.elevation]
+    name.en = "Elevation options"
+    name.fr = "Options d'élévation"
+
+        [geo.elevation.open_elevation_api_url]
         ask.en = "Add an Open Elevation API URL."
         ask.fr = "Ajouter l’URL API pour Open Elevation."
         type = "string"
@@ -82,7 +94,7 @@ services = ["__APP__", "__APP__-workers"]
         help.fr = "URL du service OpenElevation (API publique ou instance auto-hébergée)."
         bind = "OPEN_ELEVATION_API_URL:/var/www/__APP__/.env"
 
-        [geo.config.valhalla_api_url]
+        [geo.elevation.valhalla_api_url]
         ask.en = "Add a Valhalla API URL."
         ask.fr = "Ajouter l’URL API pour Valhalla."
         type = "string"
@@ -96,8 +108,6 @@ name.fr = "Configurations variées"
 services = ["__APP__", "__APP__-workers"]
 
     [misc.config]
-    name.en = "Configuration options"
-    name.fr = "Options de configuration"
 
         [misc.config.data_dir]
         ask.en = "Change data directory."
