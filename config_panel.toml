@@ -12,21 +12,46 @@ name.en = "Main configuration"
 name.fr = "Configuration principale"
 services = ["__APP__", "__APP__-workers"]
 
+    [main.tiles]
 
-    [main.config]
-    name.en = "Configuration options"
-    name.fr = "Options de configuration"
+        [main.tiles.custom_tile_provider_url]
+        ask.en = "Change the default tile url."
+        ask.fr = "Changer l'url de la tuile par défaut."
+        type = "string"
+        default = ""
+        bind = "CUSTOM_TILE_PROVIDER_URL:/var/www/__APP__/.env"
 
-        [main.config.data_dir]
-        ask.en = "Change data directory."
-        ask.fr = "Changer le répertoire de données."
-        type = "path"
-        default = "/home/yunohost.app/__APP__/"
-        help.en = "Change the data directory where are stored all the uploaded .gpx files and the profile pictures."
-        help.fr = "Change le répertoire de données où sont stockés tous les fichiers .gpx téléversés et les photos de profil."
-        bind = "UPLOAD_FOLDER:/var/www/__APP__/.env"
+        [main.tiles.custom_tile_provider_attribution]
+        ask.en = "Change the default tile attribution."
+        ask.fr = "Changer l'attribution de la tuile par défaut."
+        type = "string"
+        default = ""
+        help.en = "e.g. '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'"
+        help.fr = "par ex.: '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap</a> contributors'"
+        bind = "CUSTOM_TILE_PROVIDER_ATTRIBUTION:/var/www/__APP__/.env"
 
-        [main.config.weather_api_provider]
+        [main.tiles.custom_tile_provider_subdomains]
+        ask.en = "If needed, change the default tile subdomain."
+        ask.fr = "Si nécessaire, changer l'url de la tuile par défaut."
+        type = "string"
+        default = ""
+        bind = "CUSTOM_TILE_PROVIDER_SUBDOMAINS:/var/www/__APP__/.env"
+
+        [main.tiles.stadiamaps_api_key]
+        ask.en = "Add an API key for Stadia Maps tile provider."
+        ask.fr = "Ajouter une clé API pour le fournisseur de tuiles Stadia Maps."
+        type = "string"
+        bind = "STADIAMAPS_API_KEY:/var/www/__APP__/.env"
+
+        [main.tiles.thunderforest_api_key]
+        ask.en = "Add an API key for Thunderforest tile provider."
+        ask.fr = "Ajouter une clé API pour le fournisseur de tuiles Thunderforest."
+        type = "string"
+        bind = "THUNDERFOREST_API_KEY:/var/www/__APP__/.env"
+
+    [main.geo]
+
+        [main.geo.weather_api_provider]
         ask.en = "Change weather provider."
         ask.fr = "Changer le fournisseur météo."
         type = "select"
@@ -36,7 +61,7 @@ services = ["__APP__", "__APP__-workers"]
         help.fr = "Changer votre fournisseur météo en choisissant un de ceux qui vous sont proposés."
         bind = "WEATHER_API_PROVIDER:/var/www/__APP__/.env"
 
-        [main.config.weather_api_key]
+        [main.geo.weather_api_key]
         ask.en = "Change weather api key."
         ask.fr = "Changer la clé api pour la météo."
         type = "string"
@@ -44,7 +69,7 @@ services = ["__APP__", "__APP__-workers"]
         help.fr = "Insérer la clé api donnée par le fournisseur météo choisi."
         bind = "WEATHER_API_KEY:/var/www/__APP__/.env"
 
-        [main.config.open_elevation_api_url]
+        [main.geo.open_elevation_api_url]
         ask.en = "Add an Open Elevation API URL."
         ask.fr = "Ajouter l’URL API pour Open Elevation."
         type = "string"
@@ -52,10 +77,23 @@ services = ["__APP__", "__APP__-workers"]
         help.fr = "URL du service OpenElevation (API publique ou instance auto-hébergée)."
         bind = "OPEN_ELEVATION_API_URL:/var/www/__APP__/.env"
 
-        [main.config.valhalla_api_url]
+        [main.geo.valhalla_api_url]
         ask.en = "Add a Valhalla API URL."
         ask.fr = "Ajouter l’URL API pour Valhalla."
         type = "string"
         help.en = "URL of Valhalla service (public API or self-hosted instance)."
         help.fr = "URL du service Valhalla (API publique ou instance auto-hébergée)."
         bind = "VALHALLA_API_URL:/var/www/__APP__/.env"
+
+    [main.various]
+    name.en = "Configuration options"
+    name.fr = "Options de configuration"
+
+        [main.various.data_dir]
+        ask.en = "Change data directory."
+        ask.fr = "Changer le répertoire de données."
+        type = "path"
+        default = "/home/yunohost.app/__APP__/"
+        help.en = "Change the data directory where are stored all the uploaded .gpx files and the profile pictures."
+        help.fr = "Change le répertoire de données où sont stockés tous les fichiers .gpx téléversés et les photos de profil."
+        bind = "UPLOAD_FOLDER:/var/www/__APP__/.env"
