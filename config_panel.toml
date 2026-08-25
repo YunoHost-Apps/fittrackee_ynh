@@ -13,8 +13,8 @@ name.fr = "Configuration des tuiles"
 services = ["__APP__", "__APP__-workers"]
 
     [tiles.default]
-    name.en = "Default tiles"
-    name.fr = "Tuiles par défaut"
+    name.en = "Tile server (base map)"
+    name.fr = "Serveur de tuiles (fond de carte)"
 
         [tiles.default.custom_tile_provider_url]
         ask.en = "Change the default tile url."
