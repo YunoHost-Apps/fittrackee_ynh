@@ -5,9 +5,7 @@ source /usr/share/yunohost/helpers
 #=================================================
 # SPECIFIC GETTERS FOR TOML SHORT KEY
 #=================================================
-get__heatmap_base_zoom() {
-    ynh_app_setting_get --key=heatmap_base_zoom
-}
+
 
 #=================================================
 # SPECIFIC SETTERS FOR TOML SHORT KEYS
@@ -15,6 +13,7 @@ get__heatmap_base_zoom() {
 
 set__heatmap_base_zoom() {
     ynh_app_setting_set --key=heatmap_base_zoom --value=$heatmap_base_zoom
+    ynh_config_add --template=".env" --destination="$install_dir/.env"
 
     set -a
     source $install_dir/.env
