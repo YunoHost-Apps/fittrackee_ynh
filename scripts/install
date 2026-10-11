@@ -24,6 +24,9 @@ ynh_app_setting_set --key=valhalla_api_url --value=$valhalla_api_url
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --key=key --value=$key
 
+jwt_secret_key=$(ynh_string_random --length=45 | base64)
+ynh_app_setting_set --key=jwt_secret_key --value=$jwt_secret_key
+
 redis_db=$(ynh_redis_get_free_db)
 ynh_app_setting_set --key=redis_db --value=$redis_db
 
