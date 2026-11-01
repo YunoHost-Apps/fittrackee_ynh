@@ -33,8 +33,22 @@ ynh_app_setting_set --key=stadiamaps_api_key --value=$stadiamaps_api_key
 ynh_app_setting_set --key=thunderforest_api_key --value=$thunderforest_api_key
 ynh_app_setting_set --key=heatmap_base_zoom --value=$heatmap_base_zoom
 
+custom_tile_provider_url=""
+ynh_app_setting_set --key=custom_tile_provider_url --value=$custom_tile_provider_url
+custom_tile_provider_attribution=""
+ynh_app_setting_set --key=custom_tile_provider_attribution --value=$custom_tile_provider_attribution
+custom_tile_provider_subdomains=""
+ynh_app_setting_set --key=custom_tile_provider_subdomains --value=$custom_tile_provider_subdomains
+stadiamaps_api_key=""
+ynh_app_setting_set --key=stadiamaps_api_key --value=$stadiamaps_api_key
+thunderforest_api_key=""
+ynh_app_setting_set --key=thunderforest_api_key --value=$thunderforest_api_key
+
 key=$(ynh_string_random --length=45 | base64)
 ynh_app_setting_set --key=key --value=$key
+
+jwt_secret_key=$(ynh_string_random --length=45 | base64)
+ynh_app_setting_set --key=jwt_secret_key --value=$jwt_secret_key
 
 redis_db=$(ynh_redis_get_free_db)
 ynh_app_setting_set --key=redis_db --value=$redis_db
