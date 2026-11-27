@@ -5,6 +5,7 @@
 #=================================================
 
 source /usr/share/yunohost/helpers
+source _common.sh
 
 #=================================================
 # INITIALIZE AND STORE SETTINGS
