@@ -93,6 +93,8 @@ pushd "$install_dir"
     ynh_hide_warnings ynh_exec_as_app "$install_dir/.venv/bin/uv" venv --python 3.13 --seed --clear
     ynh_hide_warnings ynh_exec_as_app "$install_dir/.venv/bin/pip" install fittrackee=="$(ynh_app_upstream_version)"
 
+    fixupx64numpy
+
     ynh_safe_rm "$install_dir/.cache/pip"
 popd
 
